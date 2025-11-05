@@ -1,0 +1,63 @@
+2025-11-04 00:38:57,819 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:38:57,819 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:38:57,819 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:38:57,819 WARNING No node available during check_version; sleeping 0.05 secs
+2025-11-04 00:38:57,866 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:38:57,867 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:38:57,867 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:38:57,867 WARNING No node available during check_version; sleeping 0.11 secs
+2025-11-04 00:38:57,982 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:38:57,982 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:38:57,982 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:38:57,982 WARNING No node available during check_version; sleeping 0.21 secs
+2025-11-04 00:38:58,198 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:38:58,198 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:38:58,198 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:38:58,199 WARNING No node available during check_version; sleeping 0.44 secs
+2025-11-04 00:38:58,642 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:38:58,643 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:38:58,643 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:38:58,643 WARNING No node available during check_version; sleeping 0.70 secs
+2025-11-04 00:38:59,346 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:38:59,347 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:38:59,347 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:38:59,348 WARNING No node available during check_version; sleeping 0.47 secs
+2025-11-04 00:38:59,819 INFO Alpha Vantage connector started for ['AAPL', 'MSFT', 'TSLA', 'AMZN'] (interval=1min)
+2025-11-04 00:39:00,896 INFO [FETCHED] AAPL data at 2025-10-31 19:59:00: {'1. open': '270.0500', '2. high': '270.0500', '3. low': '269.9037', '4. close': '269.9995', '5. volume': '1918'}
+2025-11-04 00:39:00,900 INFO [PUSHED] AAPL → 269.9995 at 2025-10-31T19:59:00
+2025-11-04 00:40:06,814 INFO [FETCHED] MSFT data at 2025-10-31 19:59:00: {'1. open': '517.6988', '2. high': '517.7900', '3. low': '517.6600', '4. close': '517.7000', '5. volume': '310'}
+2025-11-04 00:40:06,817 INFO [PUSHED] MSFT → 517.7 at 2025-10-31T19:59:00
+2025-11-04 00:40:13,898 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:40:13,898 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:40:13,898 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:40:13,898 WARNING No node available during check_version; sleeping 0.05 secs
+2025-11-04 00:40:13,946 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:40:13,946 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:40:13,946 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:40:13,947 WARNING No node available during check_version; sleeping 0.08 secs
+2025-11-04 00:40:14,033 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:40:14,034 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:40:14,034 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:40:14,034 WARNING No node available during check_version; sleeping 0.22 secs
+2025-11-04 00:40:14,254 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:40:14,254 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:40:14,254 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:40:14,257 WARNING No node available during check_version; sleeping 0.34 secs
+2025-11-04 00:40:14,596 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:40:14,597 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:40:14,597 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:40:14,597 WARNING No node available during check_version; sleeping 0.95 secs
+2025-11-04 00:40:15,552 WARNING DNS lookup failed for kafka:9092, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-04 00:40:15,552 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: DNS lookup failed for kafka:9092 (0)
+2025-11-04 00:40:15,552 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:9092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-04 00:40:15,553 WARNING No node available during check_version; sleeping 0.34 secs
+2025-11-04 00:40:15,897 INFO Alpha Vantage connector started for ['AAPL', 'MSFT', 'TSLA', 'AMZN'] (interval=1min)
+2025-11-04 00:40:17,221 INFO [FETCHED] AAPL data at 2025-10-31 19:59:00: {'1. open': '270.0500', '2. high': '270.0500', '3. low': '269.9037', '4. close': '269.9995', '5. volume': '1918'}
+2025-11-04 00:40:17,227 INFO [PUSHED] AAPL → 269.9995 at 2025-10-31T19:59:00
+2025-11-04 00:41:23,093 INFO [FETCHED] MSFT data at 2025-10-31 19:59:00: {'1. open': '517.6988', '2. high': '517.7900', '3. low': '517.6600', '4. close': '517.7000', '5. volume': '310'}
+2025-11-04 00:41:23,095 INFO [PUSHED] MSFT → 517.7 at 2025-10-31T19:59:00
+2025-11-04 00:42:29,217 INFO [FETCHED] TSLA data at 2025-10-31 19:59:00: {'1. open': '456.1000', '2. high': '456.1000', '3. low': '456.0000', '4. close': '456.0600', '5. volume': '10284'}
+2025-11-04 00:42:29,221 INFO [PUSHED] TSLA → 456.06 at 2025-10-31T19:59:00
+2025-11-04 00:43:34,959 INFO [FETCHED] AMZN data at 2025-10-31 19:59:00: {'1. open': '244.3100', '2. high': '244.3100', '3. low': '244.2500', '4. close': '244.3000', '5. volume': '4490'}
+2025-11-04 00:43:34,962 INFO [PUSHED] AMZN → 244.3 at 2025-10-31T19:59:00
+2025-11-04 00:44:39,965 INFO [SLEEP] Cycle complete. Waiting before next round...

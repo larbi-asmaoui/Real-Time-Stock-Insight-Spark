@@ -1,0 +1,18 @@
+FROM apache/spark:latest
+
+USER root
+
+# Installer les dépendances nécessaires
+RUN apt-get update && apt-get install -y wget curl vim python3-pip openjdk-17-jdk && \
+    pip3 install pyspark kafka-python delta-spark findspark
+
+# Créer un dossier de travail
+WORKDIR /app
+
+# Copier ton code
+COPY ../src /app/src
+
+# Exposer les ports Spark
+EXPOSE 4040 7077 8080
+
+CMD ["spark-submit", "--master", "local[*]", "/app/src/processing/spark_streaming_job.py"]

@@ -1,0 +1,60 @@
+import logging
+
+import pandas as pd 
+from ingestion.kafka_producer import FinanceLakeKafkaProducer
+from stockdex import Ticker
+from datetime import datetime, timezone
+import time
+from pytz import timezone as pytz_timezone
+
+# Configure logging
+logging.basicConfig(
+    filename='logs/custom_connector.log',
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s'
+)
+
+class CustomConnector:
+    def __init__(self, symbols=None, interval=10):
+        self.symbols = symbols or ["AAPL", "GOOG", "MSFT", "AMZN"]
+        self.interval = interval
+        self.producer = FinanceLakeKafkaProducer(
+            broker="kafka:9092", topic="stock_prices"
+        )
+
+    def fetch_symbol_data(self, symbol):
+        try:
+            ticker = Ticker(ticker=symbol)
+            info = ticker.yahoo_api_price(range='1h', dataGranularity='1h')
+            records = []
+            for _, row in info.iterrows():
+                record = {
+                    "symbol": symbol,
+                    "price": float(row["close"]),
+                    "open": float(row["open"]),
+                    "high": float(row["high"]),
+                    "low": float(row["low"]),
+                    "volume": int(row["volume"]),
+                    "timestamp": str(row["timestamp"]),
+                    "source": "custom_connector"
+                }
+                records.append(record)
+            
+            print(f"[FETCHED] {symbol} data: {records}")
+            return records
+        except Exception as e:
+            logging.error(f"Fetch {symbol}: {e}")
+            return None
+
+    def run(self):
+        logging.info(f"Starting Custom connector for: {self.symbols}")
+        while True:
+            for sym in self.symbols:
+                data = self.fetch_symbol_data(sym)
+                if data:
+                    self.producer.send(data)
+            time.sleep(self.interval)
+
+
+if __name__ == "__main__":
+    CustomConnector().run()
