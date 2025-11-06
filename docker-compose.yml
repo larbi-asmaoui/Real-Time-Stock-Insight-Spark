@@ -80,6 +80,25 @@ services:
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
+    
+  spark-streaming:
+    build:
+      context: .
+      dockerfile: Dockerfile.spark
+    container_name: spark-streaming
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "4040:4040"  # Spark UI
+    environment:
+      - PYTHONPATH=/app/src
+      - SPARK_MODE=standalone
+    volumes:
+      - ./src:/app/src
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./checkpoints:/app/checkpoints
 
   scraper:
     build:
