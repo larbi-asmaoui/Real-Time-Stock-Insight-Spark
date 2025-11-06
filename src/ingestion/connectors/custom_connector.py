@@ -6,6 +6,7 @@ from stockdex import Ticker
 from datetime import datetime, timezone
 import time
 from pytz import timezone as pytz_timezone
+import os
 
 # Configure logging
 logging.basicConfig(
@@ -18,8 +19,10 @@ class CustomConnector:
     def __init__(self, symbols=None, interval=10):
         self.symbols = symbols or ["AAPL", "GOOG", "MSFT", "AMZN"]
         self.interval = interval
+        broker = os.getenv("KAFKA_BROKER", "kafka:29092")
         self.producer = FinanceLakeKafkaProducer(
-            broker="kafka:9092", topic="stock_prices"
+            # broker="kafka:9092", topic="stock_prices"
+            broker= broker, topic="stock_prices"
         )
 
     def fetch_symbol_data(self, symbol):

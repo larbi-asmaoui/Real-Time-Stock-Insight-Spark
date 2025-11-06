@@ -25,7 +25,7 @@ class FinanceLakeKafkaProducer:
         :param broker: Kafka broker address (default: kafka:9092)
         :param topic: Kafka topic to publish messages to
         """
-        self.broker = "localhost:9092"
+        self.broker = broker
         self.topic = topic
 
         try:
@@ -33,7 +33,9 @@ class FinanceLakeKafkaProducer:
                 bootstrap_servers=[self.broker],
                 # bootstrap_servers= ["localhost:9092"],
                 value_serializer=lambda v: json.dumps(v).encode("utf-8"),
-                retries=3
+                retries=3,
+                request_timeout_ms=30000,
+                api_version=(0, 10, 1)
             )
             logging.info(f"[Kafka] Connected to {self.broker}, topic={self.topic}")
         except Exception as e:
