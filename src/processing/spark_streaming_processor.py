@@ -1,4 +1,3 @@
-# spark_streaming_processor.py
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from processing.config import SparkConfig
@@ -30,46 +29,58 @@ class StockStreamingProcessor:
         return queries
     
     def start_streaming(self, write_mode="console"):
-            
         spark = self.create_spark_session()
         
         logger.info("🚦 Lancement du streaming depuis Kafka...")
 
+        # Lecture depuis Kafka
         df = (
             spark.readStream
             .format("kafka")
             .option("kafka.bootstrap.servers", self.config.KAFKA_BROKERS)
             .option("subscribe", self.config.KAFKA_TOPIC)
             .option("startingOffsets", "latest")
+            .option("failOnDataLoss", "false")
             .load()
         )
 
-        df_parsed = df.selectExpr("CAST(value AS STRING) as json_data")
+        # Parsing des données JSON
+        df_parsed = (
+            df.selectExpr("CAST(value AS STRING) as json_data")
+            .select(from_json(col("json_data"), self.schemas.get_input_schema()).alias("data"))
+            .select("data.*")
+            .withColumn("timestamp", current_timestamp())
+        )
 
-        df_clean = df_parsed.withColumn("timestamp", current_timestamp())
+        # Créer une vue temporaire
+        df_parsed.createOrReplaceTempView("stock_analytics")
 
-        df_clean.createOrReplaceTempView("stock_analytics")
+        # Agrégation simple
+        result_df = spark.sql("""
+            SELECT 
+                symbol,
+                COUNT(*) as total_records,
+                AVG(price) as avg_price,
+                MAX(price) as max_price,
+                MIN(price) as min_price
+            FROM stock_analytics
+            GROUP BY symbol
+        """)
 
-        result_df = spark.sql("SELECT COUNT(*) AS total_rows FROM stock_analytics")
+        # Écriture avec gestion d'erreurs
+        query = (
+            result_df.writeStream
+            .outputMode("complete")
+            .format("console")
+            .option("truncate", "false")
+            .trigger(processingTime="10 seconds")
+            .start()
+        )
 
-        if write_mode == "console":
-            self.streaming_query = (
-                result_df.writeStream
-                .outputMode("complete")
-                .format("console")
-                .start()
-            )
-        elif write_mode == "memory":
-            self.streaming_query = (
-                result_df.writeStream
-                .outputMode("complete")
-                .format("memory")
-                .queryName("stock_stats")
-                .start()
-            )
-        else:
-            logger.warning(f"❌ Mode d’écriture inconnu: {write_mode}")
-            return
-
-        logger.info("✅ Streaming démarré ! Consultez http://localhost:4040 pour Spark UI.")
-        self.streaming_query.awaitTermination()
+        logger.info("✅ Streaming démarré ! Spark UI: http://localhost:4040")
+        
+        try:
+            query.awaitTermination()
+        except KeyboardInterrupt:
+            logger.info("🛑 Arrêt du streaming...")
+            query.stop()

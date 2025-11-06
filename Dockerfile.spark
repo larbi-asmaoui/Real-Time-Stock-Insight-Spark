@@ -45,6 +45,8 @@
 
 FROM apache/spark-py:latest
 
+USER root
+
 WORKDIR /app
 
 # Copy the src directory
@@ -57,7 +59,10 @@ RUN mkdir -p /app/logs /app/data /app/checkpoints
 RUN pip install kafka-python pyspark findspark
 
 # Download Spark Kafka package
-RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.0/spark-sql-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.0/spark-sql-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.0/kafka-clients-3.4.0.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.4.0/spark-token-provider-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/
 
 # Set environment variables
 ENV PYTHONPATH=/app:/app/src:$PYTHONPATH
@@ -66,5 +71,10 @@ ENV SPARK_SUBMIT_PACKAGES="org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0"
 # The command to run the streaming job with explicit package inclusion
 CMD ["spark-submit", \
     "--packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0", \
-    "--conf", "spark.jars.packages=org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0", \
+    "--driver-memory", "2g", \
+    "--executor-memory", "2g", \
     "/app/src/processing/spark_streaming_main.py"]
+# CMD ["spark-submit", \
+#     "--packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0", \
+#     "--conf", "spark.jars.packages=org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0", \
+#     "/app/src/processing/spark_streaming_main.py"]
