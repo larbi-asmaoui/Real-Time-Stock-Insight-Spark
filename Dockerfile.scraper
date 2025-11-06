@@ -2,10 +2,17 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-COPY ../src /app/src
+# Copy the src directory and its contents
+COPY src /app/src
 
+# Create logs directory
+RUN mkdir -p /app/logs && chmod 777 /app/logs
+
+# Install required packages
 RUN pip install requests beautifulsoup4 kafka-python schedule yfinance defeatbeta-api stockdex
 
-# CMD ["python", "-u", "/app/src/ingestion/connectors/yahoo_connector.py"]
+# Set Python path to recognize modules
+ENV PYTHONPATH=/app/src:$PYTHONPATH
 
-CMD ["python3", "-m", "ingestion.connectors.alphavantage_connector"]
+# Update CMD to use correct path
+CMD ["python", "-u", "/app/src/ingestion/connectors/custom_connector.py"]
