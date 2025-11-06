@@ -68,8 +68,13 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.scraper
+    container_name: scraper
     depends_on:
       - kafka
+    environment:
+      - KAFKA_BROKER=localhost:9092
+      - PYTHONPATH=/app/src
+    restart: always
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
