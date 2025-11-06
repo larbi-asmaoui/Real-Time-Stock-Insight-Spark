@@ -1,4 +1,3 @@
-# spark_streaming_utils.py
 import logging
 
 def setup_logging():

@@ -17,7 +17,7 @@ logging.basicConfig(
 
 class CustomConnector:
     def __init__(self, symbols=None, interval=10):
-        self.symbols = symbols or ["AAPL", "GOOG", "MSFT", "AMZN"]
+        self.symbols = symbols or ["AAPL", "GOOG", "MSFT", "AMZN", "TSLA", "FB", "NFLX", "NVDA", "INTC", "AMD", "IBM", "ORCL"]
         self.interval = interval
         broker = os.getenv("KAFKA_BROKER", "kafka:29092")
         self.producer = FinanceLakeKafkaProducer(
@@ -33,17 +33,15 @@ class CustomConnector:
             for _, row in info.iterrows():
                 record = {
                     "symbol": symbol,
-                    "price": float(row["close"]),
-                    "open": float(row["open"]),
-                    "high": float(row["high"]),
-                    "low": float(row["low"]),
+                    "price": round(float(row["close"]), 2),
+                    "open": round(float(row["open"]), 2),
+                    "high": round(float(row["high"]), 2),
+                    "low": round(float(row["low"]), 2),
                     "volume": int(row["volume"]),
                     "timestamp": str(row["timestamp"]),
-                    "source": "custom_connector"
                 }
                 records.append(record)
             
-            # print(f"[FETCHED] {symbol} data: {records}")
             return records
         except Exception as e:
             logging.error(f"Fetch {symbol}: {e}")

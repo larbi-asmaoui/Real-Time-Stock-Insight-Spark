@@ -20,8 +20,13 @@ class SparkConfig:
     PROCESSING_TIME = "10 seconds"
     
     # Checkpoint & Storage
-    CHECKPOINT_LOCATION = "/app/checkpoints/stock_streaming"
-    OUTPUT_PATH = "/app/data/processed_stocks"
+    # CHECKPOINT_LOCATION = "/app/checkpoints/stock_streaming"
+    # OUTPUT_PATH = "/app/data/processed_stocks"
+    
+    # Storage paths for medallion architecture
+    BASE_PATH = "/app/data"
+    CHECKPOINT_LOCATION = f"{BASE_PATH}/checkpoints"
+    OUTPUT_PATH = f"{BASE_PATH}/lake"
     
     # Windowing Configuration
     WINDOW_DURATION = "10 seconds"
@@ -32,11 +37,20 @@ class SparkConfig:
     SHUFFLE_PARTITIONS = 200
     ADAPTIVE_ENABLED = True
     
+    # Delta Lake Configuration
+    DELTA_MERGE_SCHEMA = True
+    DELTA_AUTO_OPTIMIZE = True
+    
     @staticmethod
     def get_spark_configs():
         """Retourne un dict de configurations Spark"""
         return {
+            # "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0",
+            # "spark.sql.extensions": "io.delta.sql.DeltaSparkSessionExtension",
+            # "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog",
+            
             "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0",
+            
             "spark.sql.streaming.schemaInference": "false",
             "spark.sql.adaptive.enabled": "true",
             "spark.sql.adaptive.coalescePartitions.enabled": "true",

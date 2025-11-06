@@ -4,6 +4,8 @@ from processing.config import SparkConfig
 from processing.schemas import StockSchemas
 from processing.spark_streaming_utils import setup_logging, get_sql_queries
 
+from pyspark.sql.types import ArrayType
+
 logger = setup_logging()
 
 class StockStreamingProcessor:
@@ -12,15 +14,17 @@ class StockStreamingProcessor:
         self.spark = None
         self.streaming_query = None
         self.schemas = StockSchemas()
+        
+    
 
     def create_spark_session(self):
-        logger.info("🚀 Initialisation de la session Spark...")
+        logger.info("Initialisation of session Spark...")
         builder = SparkSession.builder.appName(self.config.APP_NAME)
         for k, v in self.config.get_spark_configs().items():
             builder = builder.config(k, v)
         self.spark = builder.getOrCreate()
         self.spark.sparkContext.setLogLevel(self.config.LOG_LEVEL)
-        logger.info(f"✅ Session Spark créée: {self.spark.version}")
+        logger.info(f"Session Spark created: {self.spark.version}")
         return self.spark
 
     def run_spark_sql_analysis(self, view_name="stock_analytics"):
@@ -32,8 +36,10 @@ class StockStreamingProcessor:
         spark = self.create_spark_session()
         
         logger.info("🚦 Lancement du streaming depuis Kafka...")
+        
+        input_schema = self.schemas.get_input_schema()  # StructType for one record
 
-        # Lecture depuis Kafka
+        # Read From Kafka
         df = (
             spark.readStream
             .format("kafka")
@@ -43,14 +49,13 @@ class StockStreamingProcessor:
             .option("failOnDataLoss", "false")
             .load()
         )
-
-        # Parsing des données JSON
+        
         df_parsed = (
-            df.selectExpr("CAST(value AS STRING) as json_data")
-            .select(from_json(col("json_data"), self.schemas.get_input_schema()).alias("data"))
-            .select("data.*")
-            .withColumn("timestamp", current_timestamp())
-        )
+                df.selectExpr("CAST(value AS STRING) as json_data")
+                .select(from_json(col("json_data"), ArrayType(input_schema)).alias("data"))
+                .withColumn("data", explode(col("data")))
+                .select("data.*")
+)
 
         # Créer une vue temporaire
         df_parsed.createOrReplaceTempView("stock_analytics")
@@ -60,7 +65,7 @@ class StockStreamingProcessor:
             SELECT 
                 symbol,
                 COUNT(*) as total_records,
-                AVG(price) as avg_price,
+                ROUND(AVG(price), 2) AS avg_price,
                 MAX(price) as max_price,
                 MIN(price) as min_price
             FROM stock_analytics
@@ -77,10 +82,10 @@ class StockStreamingProcessor:
             .start()
         )
 
-        logger.info("✅ Streaming démarré ! Spark UI: http://localhost:4040")
+        logger.info("Streaming is started ! Spark UI: http://localhost:4040")
         
         try:
             query.awaitTermination()
         except KeyboardInterrupt:
-            logger.info("🛑 Arrêt du streaming...")
+            logger.info("Stop streaming...")
             query.stop()
