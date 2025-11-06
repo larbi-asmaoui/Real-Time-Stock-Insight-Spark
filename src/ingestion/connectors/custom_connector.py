@@ -43,7 +43,7 @@ class CustomConnector:
                 }
                 records.append(record)
             
-            print(f"[FETCHED] {symbol} data: {records}")
+            # print(f"[FETCHED] {symbol} data: {records}")
             return records
         except Exception as e:
             logging.error(f"Fetch {symbol}: {e}")
