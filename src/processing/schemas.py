@@ -22,7 +22,6 @@ class StockSchemas:
             StructField("low", DoubleType(), False),
             StructField("volume", LongType(), False),
             StructField("timestamp", StringType(), False),
-            StructField("source", StringType(), True)
         ])
     
     @staticmethod

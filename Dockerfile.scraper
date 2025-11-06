@@ -9,7 +9,7 @@ COPY src /app/src
 RUN mkdir -p /app/logs && chmod 777 /app/logs
 
 # Install required packages
-RUN pip install requests beautifulsoup4 kafka-python schedule yfinance defeatbeta-api stockdex
+RUN pip install requests kafka-python yfinance defeatbeta-api stockdex
 
 # Set Python path to recognize modules
 ENV PYTHONPATH=/app/src:$PYTHONPATH

@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from processing.config import SparkConfig
 from processing.schemas import StockSchemas
-from .spark_streaming_utils import setup_logging, get_sql_queries
+from processing.spark_streaming_utils import setup_logging, get_sql_queries
 
 logger = setup_logging()
 

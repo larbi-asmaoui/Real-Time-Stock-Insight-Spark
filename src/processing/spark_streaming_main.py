@@ -1,6 +1,7 @@
 # spark_streaming_main.py
-from .spark_streaming_processor import StockStreamingProcessor
-from .spark_streaming_utils import setup_logging
+# from .spark_streaming_processor import StockStreamingProcessor
+from processing.spark_streaming_processor import StockStreamingProcessor
+from processing.spark_streaming_utils import setup_logging
 
 logger = setup_logging()
 

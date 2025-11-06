@@ -127,3 +127,1375 @@
 2025-11-06 12:30:50,523 INFO [KAFKA PUSH] record = [{'symbol': 'GOOG', 'price': 284.4100036621094, 'open': 284.3900146484375, 'high': 284.81939697265625, 'low': 283.4599914550781, 'volume': 0, 'timestamp': '2025-11-05 19:30:00', 'source': 'custom_connector'}, {'symbol': 'GOOG', 'price': 284.7799987792969, 'open': 284.42999267578125, 'high': 285.3900146484375, 'low': 284.385009765625, 'volume': 1536190, 'timestamp': '2025-11-05 20:30:00', 'source': 'custom_connector'}, {'symbol': 'GOOG', 'price': 284.75, 'open': 284.75, 'high': 284.75, 'low': 284.75, 'volume': 0, 'timestamp': '2025-11-05 21:00:00', 'source': 'custom_connector'}]
 2025-11-06 12:30:51,049 INFO [KAFKA PUSH] record = [{'symbol': 'MSFT', 'price': 507.80499267578125, 'open': 508.4117126464844, 'high': 508.4599914550781, 'low': 507.5400085449219, 'volume': 0, 'timestamp': '2025-11-05 19:30:00', 'source': 'custom_connector'}, {'symbol': 'MSFT', 'price': 506.989990234375, 'open': 507.82000732421875, 'high': 508.1499938964844, 'low': 506.6050109863281, 'volume': 2456430, 'timestamp': '2025-11-05 20:30:00', 'source': 'custom_connector'}, {'symbol': 'MSFT', 'price': 507.1600036621094, 'open': 507.1600036621094, 'high': 507.1600036621094, 'low': 507.1600036621094, 'volume': 0, 'timestamp': '2025-11-05 21:00:00', 'source': 'custom_connector'}]
 2025-11-06 12:30:51,497 INFO [KAFKA PUSH] record = [{'symbol': 'AMZN', 'price': 248.44000244140625, 'open': 249.11000061035156, 'high': 249.52499389648438, 'low': 248.41000366210938, 'volume': 0, 'timestamp': '2025-11-05 19:30:00', 'source': 'custom_connector'}, {'symbol': 'AMZN', 'price': 250.24000549316406, 'open': 248.44000244140625, 'high': 250.85000610351562, 'low': 248.39089965820312, 'volume': 3985436, 'timestamp': '2025-11-05 20:30:00', 'source': 'custom_connector'}, {'symbol': 'AMZN', 'price': 250.1999969482422, 'open': 250.1999969482422, 'high': 250.1999969482422, 'low': 250.1999969482422, 'volume': 0, 'timestamp': '2025-11-05 21:00:00', 'source': 'custom_connector'}]
+2025-11-06 16:19:06,320 INFO [Kafka] Connected to kafka:29092, topic=stock_prices
+2025-11-06 16:19:06,321 INFO Starting Custom connector for: ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+2025-11-06 16:19:06,384 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:06,394 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:06,398 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:08,211 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:08,793 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:09,354 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:09,807 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:11,504 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:11,510 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:11,514 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:11,599 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:11,599 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:11,600 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:11,837 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:11,839 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:11,841 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:12,199 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:12,200 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:12,202 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:13,029 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:13,036 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:13,039 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:14,752 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:14,755 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:14,757 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:18,103 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:18,104 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:18,106 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:20,338 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:20,808 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:21,282 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:21,742 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:25,197 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:25,200 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:25,202 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:32,434 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:33,098 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:33,580 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:34,176 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:40,396 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:19:40,397 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:19:40,398 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:19:44,894 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:45,446 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:45,916 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:46,501 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:57,095 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:58,282 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:58,762 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:19:59,336 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:01,663 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:20:01,665 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:20:01,671 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:20:09,827 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:10,324 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:11,116 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:11,701 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:22,366 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:22,802 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:23,280 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:24,270 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:34,543 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:20:34,551 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:20:34,553 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:20:34,860 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:35,435 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:35,993 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:36,496 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:46,936 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:47,458 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:48,014 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:48,530 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:59,188 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:20:59,720 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:00,478 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:01,542 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:06,201 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:21:06,202 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:21:06,203 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:21:11,949 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:12,421 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:12,838 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:13,242 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:23,632 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:24,155 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:24,576 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:25,067 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:34,708 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:21:34,709 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:21:34,713 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:21:35,735 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:36,149 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:36,611 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:37,087 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:47,523 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:48,143 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:48,621 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:21:49,030 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:00,047 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:00,488 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:00,968 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:01,817 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:07,360 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:22:07,363 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:22:07,365 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:22:12,510 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:12,955 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:13,476 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:14,160 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:24,674 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:25,502 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:26,111 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:26,667 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:37,172 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:37,727 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:38,573 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:39,116 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:42,248 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:22:42,256 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:22:42,261 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:22:49,641 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:50,171 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:52,696 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:22:53,376 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:04,172 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:04,999 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:05,752 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:06,393 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:12,594 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:23:12,598 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:23:12,600 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:23:16,965 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:17,411 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:17,901 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:18,380 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:28,782 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:29,253 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:29,706 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:30,200 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:40,612 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:41,099 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:41,582 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:42,089 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:43,742 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:23:43,745 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:23:43,751 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:23:53,195 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:53,625 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:54,195 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:23:54,697 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:05,256 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:05,835 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:06,373 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:06,753 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:15,799 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:24:15,805 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:24:15,813 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:24:17,198 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:17,643 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:18,263 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:18,678 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:30,068 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:30,514 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:31,029 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:31,450 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:41,936 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:42,329 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:42,738 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:43,175 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:46,425 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:24:46,428 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:24:46,431 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:24:53,782 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:54,383 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:54,760 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:24:55,455 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:05,921 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:06,388 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:06,770 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:07,155 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:17,539 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:18,153 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:18,556 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:19,063 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:20,814 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:25:20,815 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:25:20,817 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:25:29,516 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:29,956 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:30,332 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:30,770 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:41,198 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:41,695 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:42,202 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:42,624 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:53,053 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:53,607 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:53,984 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:54,441 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:25:55,899 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:25:55,899 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:25:55,903 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:26:04,838 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:05,314 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:05,704 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:06,091 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:16,539 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:17,160 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:17,631 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:18,077 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:22,782 WARNING DNS lookup failed for kafka:29092, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2025-11-06 16:26:22,783 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: DNS lookup failed for kafka:29092 (AddressFamily.AF_UNSPEC)
+2025-11-06 16:26:22,784 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [unspecified None]>: Closing connection. KafkaConnectionError: DNS failure
+2025-11-06 16:26:28,436 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:28,806 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:29,200 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:29,739 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:40,318 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:40,855 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:48,998 INFO [Kafka] Connected to kafka:29092, topic=stock_prices
+2025-11-06 16:26:48,998 INFO Starting Custom connector for: ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+2025-11-06 16:26:49,006 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:26:49,008 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:26:49,010 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:26:49,044 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:26:49,045 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:26:49,046 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:26:49,164 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:26:49,165 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:26:49,167 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:26:49,393 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:26:49,394 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:26:49,397 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:26:49,778 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:26:49,781 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:26:49,791 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:26:50,476 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:26:50,482 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:26:50,492 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:26:50,541 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:50,964 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:51,582 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:51,831 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:26:51,832 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:26:51,833 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:26:51,982 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:26:54,509 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:26:54,510 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:26:54,511 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:27:00,367 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:27:00,373 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:27:00,374 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:27:02,443 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:02,888 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:03,316 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:03,729 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:14,212 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:14,638 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:14,885 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:27:14,887 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.5', 29092)]>: Connection complete.
+2025-11-06 16:27:15,202 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:15,875 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:26,348 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:26,792 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:27,237 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:27,671 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:38,093 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:38,510 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:38,887 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:39,263 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:49,786 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:50,272 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:50,742 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:27:51,242 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:01,943 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:02,345 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:02,738 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:03,288 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:13,788 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:14,268 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:14,735 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:15,218 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:25,762 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:26,287 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:26,884 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:27,536 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:38,030 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:38,543 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:39,173 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:39,678 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:50,319 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:50,855 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:51,297 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:28:51,968 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:02,630 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:03,060 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:03,567 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:03,986 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:15,301 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:15,854 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:16,294 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:16,731 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:27,309 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:27,921 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:28,745 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:29,245 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:39,799 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:40,374 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:40,863 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:41,404 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:51,831 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:52,272 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:52,776 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:29:53,194 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:03,722 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:04,579 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:05,107 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:05,632 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:16,097 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:16,648 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:17,085 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:17,624 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:28,240 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:28,938 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:29,468 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:29,963 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:40,432 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:40,870 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:41,372 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:41,788 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:52,227 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:52,871 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:53,372 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:30:53,786 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:04,209 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:04,640 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:05,364 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:06,009 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:16,462 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:17,114 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:17,543 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:18,014 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:28,537 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:28,996 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:29,399 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:29,804 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:40,251 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:40,756 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:41,477 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:41,899 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:52,345 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:52,771 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:53,238 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:31:53,635 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:04,051 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:04,468 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:04,864 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:05,236 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:14,923 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:32:14,927 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:29092 <connected> [IPv4 ('172.18.0.5', 29092)]>: Connection complete.
+2025-11-06 16:32:14,929 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. 
+2025-11-06 16:32:15,747 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:16,276 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:16,765 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:17,221 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:27,665 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:28,275 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:28,779 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:29,212 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:39,640 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:40,155 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:40,606 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:41,575 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:51,995 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:52,388 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:52,805 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:32:53,284 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:03,720 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:04,173 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:04,800 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:05,251 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:15,666 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:16,316 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:16,897 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:17,293 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:27,897 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:28,472 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:29,100 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:29,530 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:41,785 INFO [Kafka] Connected to kafka:29092, topic=stock_prices
+2025-11-06 16:33:41,794 INFO Starting Custom connector for: ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+2025-11-06 16:33:41,794 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:41,799 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:33:41,800 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:33:41,831 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:41,831 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:33:41,833 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:33:41,923 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:41,926 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:33:41,927 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:33:42,141 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:42,143 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:33:42,145 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:33:42,607 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:42,608 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:33:42,609 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:33:43,131 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:43,419 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:43,425 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:33:43,426 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:33:43,555 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:43,967 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:44,346 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:45,290 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:45,290 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:33:45,291 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:33:48,813 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:48,817 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:33:48,821 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:33:54,852 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:55,326 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:55,810 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:33:56,161 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:33:56,164 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Connection complete.
+2025-11-06 16:33:56,665 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:07,060 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:07,489 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:07,882 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:08,252 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:18,665 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:19,260 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:19,645 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:20,086 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:30,467 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:30,835 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:31,427 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:31,838 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:42,286 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:42,703 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:43,098 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:43,493 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:53,910 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:54,265 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:54,603 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:34:55,164 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:05,549 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:30,243 INFO [Kafka] Connected to kafka:29092, topic=stock_prices
+2025-11-06 16:35:30,244 INFO Starting Custom connector for: ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+2025-11-06 16:35:30,251 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:30,252 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:30,253 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:30,301 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:30,303 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:30,304 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:30,393 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:30,396 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:30,397 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:30,596 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:30,600 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:30,602 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:31,054 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:31,056 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:31,057 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:31,368 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:31,738 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:31,809 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:31,817 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:31,819 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:32,293 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:32,901 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:33,665 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:33,667 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:33,668 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:37,290 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:37,295 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:37,297 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:43,273 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:43,687 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:43,782 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:43,784 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:35:43,785 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:35:44,098 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:44,477 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:54,884 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:55,258 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:55,642 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:56,067 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:35:58,723 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.5', 29092)]>: connecting to kafka:29092 [('172.18.0.5', 29092) IPv4]
+2025-11-06 16:35:58,724 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.5', 29092)]>: Connection complete.
+2025-11-06 16:36:06,590 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:07,010 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:07,391 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:07,799 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:18,213 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:18,629 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:19,099 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:19,626 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:30,036 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:30,419 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:30,849 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:31,220 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:41,829 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:42,286 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:42,663 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:43,033 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:53,493 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:53,897 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:54,275 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:36:54,639 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:05,014 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:05,484 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:05,847 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:06,211 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:16,623 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:17,012 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:17,448 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:17,864 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:37,132 INFO [Kafka] Connected to kafka:29092, topic=stock_prices
+2025-11-06 16:37:37,133 INFO Starting Custom connector for: ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+2025-11-06 16:37:37,144 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:37,148 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:37,149 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:37,190 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:37,191 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:37,192 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:37,310 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:37,316 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:37,319 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:37,535 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:37,540 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:37,542 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:37,992 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:37,993 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:37,995 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:38,196 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:38,637 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:38,780 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:38,786 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:38,787 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:39,295 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:39,764 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:40,458 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:40,459 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:40,460 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:43,457 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:43,462 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:43,463 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:50,023 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:37:50,029 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:37:50,031 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:37:50,149 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:50,542 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:51,139 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:37:51,524 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:01,592 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:38:01,601 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Connection complete.
+2025-11-06 16:38:01,950 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:02,335 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:02,707 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:03,169 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:13,635 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:14,061 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:14,505 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:14,972 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:25,597 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:25,994 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:26,417 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:26,818 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:37,246 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:37,697 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:38,112 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:38,547 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:48,929 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:49,413 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:51,688 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:38:52,118 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:02,597 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:03,037 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:03,545 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:03,971 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:14,375 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:14,882 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:15,320 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:15,840 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:26,448 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:26,961 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:27,593 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:28,201 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:38,619 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:39,065 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:39,481 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:39,922 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:50,377 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:50,856 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:51,278 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:39:51,766 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:02,215 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:02,686 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:03,289 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:03,704 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:14,144 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:14,690 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:15,162 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:15,607 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:26,047 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:26,451 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:27,000 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:27,376 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:38,430 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:38,816 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:39,237 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:39,622 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:50,058 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:50,454 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:50,844 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:40:51,279 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:01,682 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:02,108 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:02,541 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:02,998 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:19,335 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:19,782 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:20,366 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:20,788 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:31,194 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:31,587 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:31,992 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:32,434 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:42,873 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:43,276 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:43,857 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:44,244 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:54,669 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:55,144 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:55,557 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:41:55,992 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:06,463 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:07,003 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:07,424 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:07,909 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:18,366 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:18,800 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:19,214 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:19,680 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:30,286 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:30,702 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:31,085 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:31,491 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:41,900 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:42,411 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:42,839 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:43,296 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:53,740 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:54,126 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:54,504 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:42:54,887 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:01,713 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:43:01,716 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Connection complete.
+2025-11-06 16:43:01,721 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. 
+2025-11-06 16:43:05,362 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:05,769 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:06,241 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:06,900 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:17,515 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:17,969 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:18,586 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:19,077 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:29,818 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:30,388 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:31,040 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:31,455 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:41,972 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:42,474 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:43,003 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:43,524 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:53,939 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:54,370 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:54,786 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:43:55,212 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:05,720 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:06,195 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:06,887 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:07,298 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:17,968 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:18,457 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:18,930 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:19,423 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:29,912 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:30,430 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:30,899 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:31,369 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:41,766 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:42,276 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:42,845 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:43,294 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:53,699 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:54,129 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:54,569 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:44:55,021 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:05,389 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:05,761 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:06,142 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:06,529 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:16,972 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:17,576 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:18,004 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:18,465 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:29,203 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:30,043 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:31,231 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:31,819 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:42,235 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:42,627 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:43,038 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:43,462 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:53,983 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:54,433 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:54,928 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:45:55,383 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:05,910 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:06,342 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:06,841 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:09,216 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:19,631 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:20,106 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:20,745 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:21,142 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:31,520 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:31,993 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:32,861 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:33,336 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:43,876 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:44,311 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:44,728 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:45,118 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:55,607 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:56,161 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:56,724 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:46:57,566 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:07,985 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:08,413 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:08,838 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:09,257 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:19,645 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:20,018 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:20,425 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:20,833 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:43,705 INFO [Kafka] Connected to kafka:29092, topic=stock_prices
+2025-11-06 16:47:43,713 INFO Starting Custom connector for: ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+2025-11-06 16:47:43,716 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:43,726 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:43,729 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:43,759 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:43,767 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:43,767 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:43,859 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:43,873 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:43,882 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:44,084 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:44,087 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:44,089 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:44,548 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:44,552 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:44,555 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:45,257 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:45,285 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:45,290 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:45,290 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:46,045 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:46,501 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:46,852 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:46,869 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:46,878 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:46,955 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:49,576 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:49,583 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:49,586 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:56,771 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:47:56,774 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:47:56,779 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:47:57,425 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:57,867 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:47:58,346 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:01,001 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:11,272 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:48:11,277 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 16:48:11,280 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 16:48:11,540 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:11,951 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:12,574 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:13,114 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:23,671 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:24,405 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:24,861 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:25,366 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:35,867 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:36,284 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:37,078 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:37,528 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:40,372 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:48:40,377 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Connection complete.
+2025-11-06 16:48:48,112 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:48,539 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:49,165 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:48:49,632 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:00,807 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:01,230 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:01,671 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:02,107 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:12,554 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:12,989 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:13,518 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:13,926 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:24,406 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:24,921 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:25,333 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:25,819 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:36,369 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:36,798 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:37,574 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:38,033 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:48,514 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:48,984 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:49,420 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:49:49,847 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:00,473 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:00,907 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:01,539 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:01,939 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:12,396 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:12,820 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:13,494 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:14,008 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:24,505 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:25,026 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:25,511 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:26,026 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:36,476 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:37,343 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:37,897 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:38,414 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:48,878 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:49,336 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:49,769 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:50:50,227 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:00,811 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:01,321 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:01,855 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:02,414 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:12,911 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:13,393 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:13,872 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:14,371 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:24,828 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:25,337 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:25,762 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:26,172 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:36,636 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:37,032 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:37,752 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:38,170 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:48,559 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:49,031 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:49,436 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:51:49,858 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:00,353 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:00,779 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:03,956 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:04,462 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:14,989 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:15,417 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:15,937 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:16,346 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:26,892 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:27,422 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:28,041 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:28,535 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:38,946 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:39,486 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:39,948 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:40,404 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:50,950 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:51,383 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:51,810 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:52:52,350 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:02,755 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:03,167 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:03,652 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:04,082 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:14,576 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:15,005 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:15,609 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:16,241 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:26,933 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:27,373 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:27,776 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:28,190 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:38,598 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:39,091 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:39,485 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:39,952 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:41,235 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 16:53:41,236 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Connection complete.
+2025-11-06 16:53:41,237 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. 
+2025-11-06 16:53:50,370 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:50,810 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:51,452 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:53:51,900 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:54:02,385 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:54:02,927 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:54:03,362 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:54:03,763 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 16:54:14,159 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 16:54:14,735 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 16:54:15,141 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 16:54:15,585 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:05,501 INFO [Kafka] Connected to kafka:29092, topic=stock_prices
+2025-11-06 17:50:05,504 INFO Starting Custom connector for: ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+2025-11-06 17:50:05,512 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:05,518 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:05,519 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:05,549 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:05,552 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:05,553 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:05,637 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:05,649 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:05,650 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:05,825 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:05,831 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:05,833 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:06,189 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:06,191 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:06,195 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:07,146 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:07,150 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:07,152 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:08,485 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:08,494 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:08,495 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:10,972 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:11,990 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:12,180 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:12,182 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:12,189 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:13,181 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:14,403 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:17,587 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:17,592 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 17:50:17,594 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 17:50:26,282 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:27,844 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:29,865 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:31,602 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:31,768 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:50:31,773 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Connection complete.
+2025-11-06 17:50:34,373 WARNING No broker metadata found in MetadataResponse -- ignoring.
+2025-11-06 17:50:43,244 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:45,118 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:46,486 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:48,094 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:58,481 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:58,948 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:59,417 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:50:59,787 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:11,600 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:13,394 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:15,821 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:18,378 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:30,643 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:32,868 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:34,696 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:36,527 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:48,610 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:49,927 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:51,339 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:51:52,971 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:04,253 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:05,937 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:07,095 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:08,125 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:19,367 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:20,574 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:21,552 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:22,310 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:33,568 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:34,670 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:35,967 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:37,718 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:49,364 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:51,489 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:53,476 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:52:55,607 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:06,187 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:06,581 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:07,123 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:07,613 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:18,130 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:18,503 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:18,899 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:19,360 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:29,870 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:32,690 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:34,313 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:37,408 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:50,652 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:51,016 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:51,471 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:53:51,923 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:02,365 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:02,784 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:03,161 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:03,609 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:14,126 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:14,621 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:15,069 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:15,601 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:26,143 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:26,515 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:26,873 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:27,376 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:37,821 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:38,184 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:38,546 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:38,999 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:49,450 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:49,921 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:50,393 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:54:50,778 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:01,469 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:01,843 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:02,371 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:02,826 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:13,207 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:13,661 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:14,264 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:14,641 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:25,135 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:25,556 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:25,955 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:26,342 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:34,560 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 17:55:34,563 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=1 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Connection complete.
+2025-11-06 17:55:34,563 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. 
+2025-11-06 17:55:36,840 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:37,353 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:37,830 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:38,219 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:48,750 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:49,157 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:49,622 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:55:50,199 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:00,683 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:01,057 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:02,112 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:02,519 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:12,892 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:13,342 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:13,794 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:14,254 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:24,611 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:25,098 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:25,664 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:26,020 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:36,535 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:37,084 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:37,555 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:37,984 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:48,465 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:48,840 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:49,248 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:56:49,776 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:03,165 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:04,081 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:04,563 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:04,942 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:15,339 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:15,935 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:16,347 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:16,870 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:27,319 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:27,805 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:28,241 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:28,715 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:39,423 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:39,890 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:40,487 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:40,848 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:51,330 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:51,907 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:52,334 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:57:52,726 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:03,132 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:03,508 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:04,073 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:04,425 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:14,908 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:15,351 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:15,835 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:16,356 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:26,966 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:27,656 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:28,058 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:28,608 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:39,075 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:39,524 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:39,894 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:40,431 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:50,951 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:51,340 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:51,763 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:58:52,262 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:02,722 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:04,055 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:04,428 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:04,891 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:15,266 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:15,718 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:16,157 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:16,747 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:27,189 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:27,931 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:28,542 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:29,365 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:40,007 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:40,607 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:40,961 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:41,354 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:51,818 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:52,369 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:52,804 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 17:59:53,384 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:03,819 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:04,398 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:04,868 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:05,269 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:15,747 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:16,268 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:16,677 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:17,275 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:27,765 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:28,367 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:28,830 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:29,257 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:39,868 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:40,249 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:40,716 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:41,136 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:51,518 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:51,869 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:52,265 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:00:52,651 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:03,015 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:03,452 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:03,939 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:04,354 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:15,081 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:18,973 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:19,890 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:20,348 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:31,591 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:32,232 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:32,722 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:33,323 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:43,767 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:44,147 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:44,517 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:45,066 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:55,793 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:56,326 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:56,858 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:01:57,491 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:07,962 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:08,414 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:08,891 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:09,453 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:22,824 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:23,214 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:23,770 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:24,155 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:34,637 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:36,489 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:36,906 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:37,514 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:48,343 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:49,024 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:49,481 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:02:49,961 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:00,338 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:00,776 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:01,496 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:01,959 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:12,405 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:13,077 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:15,084 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:15,727 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:26,689 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:27,197 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:27,657 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:28,092 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:40,769 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:03:52,045 ERROR Fetch GOOG: Failed to perform, curl: (28) Operation timed out after 10003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2025-11-06 18:04:02,448 ERROR Fetch MSFT: Error fetching Yahoo crumb: Failed to perform, curl: (28) Operation timed out after 10003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2025-11-06 18:04:11,366 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:21,887 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:22,356 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:22,862 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:23,357 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:33,895 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:34,367 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:35,136 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:35,581 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:46,038 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:46,603 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:47,141 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:47,530 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:58,099 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:58,685 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:59,429 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:04:59,927 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:11,671 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:12,446 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:13,639 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:14,149 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:24,654 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:25,193 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:25,582 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:26,904 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:37,361 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:37,827 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:38,221 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:38,604 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:50,689 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:51,167 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:53,177 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:05:54,649 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:05,124 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:05,897 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:06,674 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:07,068 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:18,137 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:18,582 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:19,032 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:19,560 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:30,287 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:30,770 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:31,195 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:31,750 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:42,363 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:43,086 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:43,483 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:43,868 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:54,591 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:55,214 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:55,681 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:06:56,061 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:06,503 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:06,957 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:07,355 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:07,781 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:18,441 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:19,369 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:19,751 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:20,146 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:30,516 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:31,330 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:31,722 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:32,402 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:42,881 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:43,248 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:43,794 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:07:44,215 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:06,867 INFO [Kafka] Connected to kafka:29092, topic=stock_prices
+2025-11-06 18:08:06,868 INFO Starting Custom connector for: ['AAPL', 'GOOG', 'MSFT', 'AMZN']
+2025-11-06 18:08:06,874 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:06,875 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:06,875 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:06,928 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:06,929 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:06,930 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:07,013 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:07,025 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:07,028 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:07,202 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:07,204 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:07,205 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:07,625 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:07,629 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:07,630 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:08,318 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:08,320 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:08,321 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:09,668 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:09,669 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:09,670 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:09,954 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:10,381 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:10,802 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:12,941 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:12,960 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:12,962 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:12,966 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:20,362 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:20,377 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Connect attempt returned error 111. Disconnecting.
+2025-11-06 18:08:20,383 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2025-11-06 18:08:23,368 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:23,903 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:24,467 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:24,902 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:34,372 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connecting> [IPv4 ('172.18.0.4', 29092)]>: connecting to kafka:29092 [('172.18.0.4', 29092) IPv4]
+2025-11-06 18:08:34,373 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=kafka:29092 <connected> [IPv4 ('172.18.0.4', 29092)]>: Connection complete.
+2025-11-06 18:08:35,346 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:35,767 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:36,395 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:38,283 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:48,771 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:49,226 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:49,729 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:08:50,462 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:02,928 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:03,455 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:04,009 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:04,494 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:14,939 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:15,923 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:17,291 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:17,832 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:28,381 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:29,216 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:29,740 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:30,372 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:40,981 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:41,484 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:41,888 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:42,359 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:53,027 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:53,570 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:54,065 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:09:54,686 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:05,603 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:06,103 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:06,661 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:07,170 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:17,741 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:19,062 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:19,626 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:21,087 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:32,659 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:33,216 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:33,689 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:34,480 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:45,085 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:45,765 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:46,203 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:46,735 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:57,188 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:57,613 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:58,107 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:10:58,636 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:09,029 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:10,367 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:10,991 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:11,384 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:24,367 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:25,229 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:28,096 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:28,574 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:39,110 ERROR Fetch AAPL: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:39,524 ERROR Fetch GOOG: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:40,132 ERROR Fetch MSFT: could not convert string to float: 'Data Not Available'
+2025-11-06 18:11:40,557 ERROR Fetch AMZN: could not convert string to float: 'Data Not Available'

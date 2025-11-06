@@ -7,7 +7,7 @@ class SparkConfig:
     """Configuration Spark optimisée pour streaming financier"""
     
     # Kafka Configuration
-    KAFKA_BOOTSTRAP_SERVERS = "kafka:29092"
+    KAFKA_BROKERS = "kafka:29092"
     KAFKA_TOPIC = "stock_prices"
     KAFKA_STARTING_OFFSETS = "latest"  # ou "earliest" pour historique
     
@@ -36,6 +36,7 @@ class SparkConfig:
     def get_spark_configs():
         """Retourne un dict de configurations Spark"""
         return {
+            "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0",
             "spark.sql.streaming.schemaInference": "false",
             "spark.sql.adaptive.enabled": "true",
             "spark.sql.adaptive.coalescePartitions.enabled": "true",

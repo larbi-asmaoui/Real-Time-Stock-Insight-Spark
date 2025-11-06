@@ -1,22 +1,70 @@
-FROM apache/spark:latest
+# FROM apache/spark:latest
 
-USER root
+# USER root
 
-RUN apt-get update && apt-get install -y wget curl vim python3-pip openjdk-17-jdk && \
-    pip3 install pyspark kafka-python delta-spark findspark
+# RUN apt-get update && apt-get install -y wget curl vim python3-pip openjdk-17-jdk && \
+#     pip3 install pyspark kafka-python delta-spark findspark
+
+# WORKDIR /app
+
+# COPY src /app/src
+
+# RUN mkdir -p /app/logs && chmod 777 /app/logs
+
+# ENV PYTHONPATH=/app/src:$PYTHONPATH
+
+# EXPOSE 4040 7077 8080
+
+# ENV PYTHONPATH=/app/src:$PYTHONPATH
+# ENV PYSPARK_PYTHON=python3
+# ENV PYSPARK_DRIVER_PYTHON=python3
+
+# CMD ["spark-submit", "--master", "local[*]", "/app/src/processing/spark_streaming_main.py"]
+
+
+# FROM apache/spark-py:latest
+
+# WORKDIR /app
+
+# # Copy the src directory
+# COPY src /app/src
+
+# # Create necessary directories
+# RUN mkdir -p /app/logs /app/data /app/checkpoints
+
+# # Set Python path
+# ENV PYTHONPATH=/app:/app/src:$PYTHONPATH
+
+# # Install required packages
+# RUN pip install kafka-python pyspark findspark
+
+# ENV SPARK_SUBMIT_PACKAGES="org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0"
+
+# # The command to run the streaming job
+# CMD ["python", "-u", "/app/src/processing/spark_streaming_main.py"]
+
+FROM apache/spark-py:latest
 
 WORKDIR /app
 
+# Copy the src directory
 COPY src /app/src
 
-RUN mkdir -p /app/logs && chmod 777 /app/logs
+# Create necessary directories
+RUN mkdir -p /app/logs /app/data /app/checkpoints
 
-ENV PYTHONPATH=/app/src:$PYTHONPATH
+# Install required packages
+RUN pip install kafka-python pyspark findspark
 
-EXPOSE 4040 7077 8080
+# Download Spark Kafka package
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.0/spark-sql-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/
 
-ENV PYTHONPATH=/app/src:$PYTHONPATH
-ENV PYSPARK_PYTHON=python3
-ENV PYSPARK_DRIVER_PYTHON=python3
+# Set environment variables
+ENV PYTHONPATH=/app:/app/src:$PYTHONPATH
+ENV SPARK_SUBMIT_PACKAGES="org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0"
 
-CMD ["spark-submit", "--master", "local[*]", "/app/src/processing/spark_streaming_main.py"]
+# The command to run the streaming job with explicit package inclusion
+CMD ["spark-submit", \
+    "--packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0", \
+    "--conf", "spark.jars.packages=org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0", \
+    "/app/src/processing/spark_streaming_main.py"]
