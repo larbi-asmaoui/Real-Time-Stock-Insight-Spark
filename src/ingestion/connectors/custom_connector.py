@@ -28,7 +28,7 @@ class CustomConnector:
     def fetch_symbol_data(self, symbol):
         try:
             ticker = Ticker(ticker=symbol)
-            info = ticker.yahoo_api_price(range='1h', dataGranularity='1h')
+            info = ticker.yahoo_api_price(range='1y', dataGranularity='1d')
             records = []
             for _, row in info.iterrows():
                 record = {

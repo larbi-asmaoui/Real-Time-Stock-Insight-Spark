@@ -45,11 +45,17 @@ class SparkConfig:
     def get_spark_configs():
         """Retourne un dict de configurations Spark"""
         return {
-            # "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0",
-            # "spark.sql.extensions": "io.delta.sql.DeltaSparkSessionExtension",
-            # "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog",
+           
+            "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0",
             
-            "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0",
+            # --- DELTA LAKE CONFIGURATION ---
+            "spark.sql.extensions": "io.delta.sql.DeltaSparkSessionExtension",
+            "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog",
+            "spark.databricks.delta.schema.autoMerge.enabled": str(SparkConfig.DELTA_MERGE_SCHEMA).lower(),
+            
+            
+            "spark.sql.streaming.schemaInference": "false",
+            "spark.sql.adaptive.enabled": "true",
             
             "spark.sql.streaming.schemaInference": "false",
             "spark.sql.adaptive.enabled": "true",

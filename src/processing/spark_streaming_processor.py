@@ -32,6 +32,84 @@ class StockStreamingProcessor:
         queries = get_sql_queries(view_name)
         return queries
     
+    # def start_streaming(self, write_mode="medallion"):
+    #     spark = self.create_spark_session(conf=SparkConfig.get_spark_configs())
+
+    #     # read raw Kafka stream
+    #     raw = (
+    #         spark.readStream
+    #         .format("kafka")
+    #         .option("kafka.bootstrap.servers", self.config.KAFKA_BROKERS)
+    #         .option("subscribe", self.config.KAFKA_TOPIC)
+    #         .option("startingOffsets", self.config.KAFKA_STARTING_OFFSETS)
+    #         .option("failOnDataLoss", "false")
+    #         .load()
+    #     )
+
+    #     # parse value (assumes JSON string payload)
+    #     parsed = (
+    #         raw.selectExpr("CAST(value AS STRING) as json_str", "timestamp as kafka_timestamp")
+    #            .withColumn("data", from_json(col("json_str"), self.schemas.get_input_schema()))
+    #            .select("data.*", "kafka_timestamp")
+    #            .withColumn("timestamp", to_timestamp(col("timestamp")))
+    #            .withColumn("date_partition", date_format(col("kafka_timestamp"), "yyyy-MM-dd"))
+    #     )
+
+    #     # Bronze: raw JSON persisted as delta (append)
+    #     bronze_path = f"{self.config.OUTPUT_PATH}/bronze"
+    #     bronze_checkpoint = f"{self.config.CHECKPOINT_LOCATION}/bronze"
+    #     bronze_q = (
+    #         parsed.writeStream
+    #         .format("delta")
+    #         .option("checkpointLocation", bronze_checkpoint)
+    #         .partitionBy("date_partition")
+    #         .outputMode("append")
+    #         .start(bronze_path)
+    #     )
+
+    #     # Silver: cleaned, typed, deduped
+    #     silver_df = (
+    #         parsed
+    #         .dropDuplicates(["symbol", "timestamp"])
+    #         .filter(col("price").isNotNull())
+    #     )
+    #     silver_path = f"{self.config.OUTPUT_PATH}/silver"
+    #     silver_checkpoint = f"{self.config.CHECKPOINT_LOCATION}/silver"
+    #     silver_q = (
+    #         silver_df.writeStream
+    #         .format("delta")
+    #         .option("checkpointLocation", silver_checkpoint)
+    #         .partitionBy("date_partition")
+    #         .outputMode("append")
+    #         .start(silver_path)
+    #     )
+
+    #     # Gold: aggregated business metrics (hourly example)
+    #     gold_df = (
+    #         silver_df.withWatermark("timestamp", "1 minute")
+    #         .groupBy(window(col("timestamp"), "1 hour"), col("symbol"))
+    #         .agg(
+    #             {"price": "avg", "price": "max", "price": "min"}
+    #         )
+    #     )
+    #     gold_path = f"{self.config.OUTPUT_PATH}/gold"
+    #     gold_checkpoint = f"{self.config.CHECKPOINT_LOCATION}/gold"
+    #     gold_q = (
+    #         gold_df.writeStream
+    #         .format("delta")
+    #         .option("checkpointLocation", gold_checkpoint)
+    #         .outputMode("complete")
+    #         .start(gold_path)
+    #     )
+
+    #     # keep streaming until stopped
+    #     try:
+    #         spark.streams.awaitAnyTermination()
+    #     except KeyboardInterrupt:
+    #         for q in (bronze_q, silver_q, gold_q):
+    #             if q and q.isActive:
+    #                 q.stop()
+    
     def start_streaming(self, write_mode="console"):
         spark = self.create_spark_session()
         
@@ -73,13 +151,23 @@ class StockStreamingProcessor:
         """)
 
         # Écriture avec gestion d'erreurs
+        # query = (
+        #     result_df.writeStream
+        #     .outputMode("complete")
+        #     .format("console")
+        #     .option("truncate", "false")
+        #     .trigger(processingTime="10 seconds")
+        #     .start()
+        # )
+        
+        # write also in delta lake
         query = (
             result_df.writeStream
             .outputMode("complete")
-            .format("console")
-            .option("truncate", "false")
+            .format("delta")
+            .option("checkpointLocation", f"{self.config.CHECKPOINT_LOCATION}/gold")
             .trigger(processingTime="10 seconds")
-            .start()
+            .start(f"{self.config.OUTPUT_PATH}/gold")
         )
 
         logger.info("Streaming is started ! Spark UI: http://localhost:4040")

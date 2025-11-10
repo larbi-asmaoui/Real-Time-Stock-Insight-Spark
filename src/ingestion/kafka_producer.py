@@ -2,6 +2,8 @@
 Kafka Producer Utility for FinanceLake
 --------------------------------------
 Centralized module to send data from any connector to Kafka.
+
+Create by: A
 """
 
 import json

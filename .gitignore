@@ -17,4 +17,8 @@ lib64/
 parts/
 sdist/
 logs/
-
+.env
+*.env
+data/
+checkpoints/
+logs/
