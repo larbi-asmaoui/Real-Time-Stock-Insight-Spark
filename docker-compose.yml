@@ -19,15 +19,6 @@ services:
     ports:
       - "9092:9092"
       - "29092:29092"
-    # environment:
-    #   KAFKA_BROKER_ID: 1
-    #   KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    #   KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-    #   KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-    #   KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    #   KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-    #   KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-    #   KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
@@ -40,7 +31,13 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
     healthcheck:
-      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      test:
+        [
+          "CMD",
+          "kafka-broker-api-versions",
+          "--bootstrap-server",
+          "localhost:9092",
+        ]
       interval: 10s
       timeout: 10s
       retries: 5
@@ -81,6 +78,25 @@ services:
       - ./src:/app/src
       - ./logs:/app/logs
 
+  spark-streaming:
+    build:
+      context: .
+      dockerfile: Dockerfile.spark
+    container_name: spark-streaming
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "4040:4040" # Spark UI
+    environment:
+      - PYTHONPATH=/app/src
+      - SPARK_MODE=standalone
+    volumes:
+      - ./src:/app/src
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./checkpoints:/app/checkpoints
+
   scraper:
     build:
       context: .
@@ -90,7 +106,7 @@ services:
       - kafka
     environment:
       # - KAFKA_BROKER=localhost:9092
-      - KAFKA_BROKER=kafka:29092 
+      - KAFKA_BROKER=kafka:29092
       - PYTHONPATH=/app/src
     restart: always
     volumes:

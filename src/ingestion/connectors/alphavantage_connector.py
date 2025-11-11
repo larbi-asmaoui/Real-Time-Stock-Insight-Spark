@@ -10,7 +10,8 @@ import time
 from datetime import datetime
 import requests
 from ingestion.kafka_producer import FinanceLakeKafkaProducer
-import logging 
+import logging
+import os
 
 
 # Configure logging
@@ -20,12 +21,15 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s'
 )
 
+ALPHAVANTAGE_API_KEY = "YOUR API KEY HERE"
+
+
 class AlphaVantageConnector:
     """
     Collects stock price data using the Alpha Vantage API and publishes it to Kafka.
     """
 
-    def __init__(self, api_key="7UYREEDLILBZ2V93",
+    def __init__(self, api_key,
                  symbols=None, interval="1min", fetch_delay=60):
         """
         :param api_key: Alpha Vantage API key
@@ -37,7 +41,7 @@ class AlphaVantageConnector:
         """
         self.api_key = api_key
         self.base_url = "https://www.alphavantage.co/query"
-        self.symbols = symbols or ["AAPL", "GOOG", "MSFT", "AMZN"]
+        self.symbols = symbols or ["AAPL", "GOOG", "MSFT", "AMZN", "TSLA"]
         self.interval = interval
         self.fetch_delay = fetch_delay
 
@@ -112,7 +116,7 @@ class AlphaVantageConnector:
 
 if __name__ == "__main__":
     connector = AlphaVantageConnector(
-        api_key=os.getenv("ALPHA_VANTAGE_KEY", "YOUR_API_KEY"),
+        api_key=os.getenv("ALPHA_VANTAGE_KEY", ALPHAVANTAGE_API_KEY),
         symbols=["TSLA", "NFLX", "FB"],
         interval="1min",
         fetch_delay=10, 

@@ -1,21 +1,35 @@
-FROM apache/spark:latest
+FROM apache/spark-py:v3.4.0
 
 USER root
 
-# Installer les dépendances nécessaires
-RUN apt-get update && apt-get install -y wget curl vim python3-pip openjdk-17-jdk && \
-    pip3 install pyspark kafka-python delta-spark findspark
-
 WORKDIR /app
 
+# Copy the src directory
 COPY src /app/src
 
-# Create logs directory
-RUN mkdir -p /app/logs && chmod 777 /app/logs
+# Create necessary directories
+RUN mkdir -p /app/logs /app/data /app/checkpoints
 
-ENV PYTHONPATH=/app/src:$PYTHONPATH
+# Install required packages
+RUN pip install kafka-python pyspark findspark delta-spark==2.4.0
 
-# Exposer les ports Spark
-EXPOSE 4040 7077 8080
+# Download Spark Kafka package
+RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.0/spark-sql-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.0/kafka-clients-3.4.0.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.4.0/spark-token-provider-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/io/delta/delta-core_2.12/2.4.0/delta-core_2.12-2.4.0.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/io/delta/delta-storage/2.4.0/delta-storage-2.4.0.jar -P /opt/spark/jars/ && \
+    wget https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.9.3/antlr4-runtime-4.9.3.jar -P /opt/spark/jars/
 
-CMD ["spark-submit", "--master", "local[*]", "/app/src/processing/spark_streaming_job.py"]
+
+# Set environment variables
+ENV PYTHONPATH=/app:/app/src:$PYTHONPATH
+ENV SPARK_PACKAGES="org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0"
+
+# The command to run the streaming job with explicit package inclusion
+CMD ["spark-submit", \
+    "--packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0", \
+    "--driver-memory", "2g", \
+    "--executor-memory", "2g", \
+    "/app/src/processing/spark_streaming_main.py"]
