@@ -19,14 +19,13 @@ class SparkConfig:
     MAX_OFFSETS_PER_TRIGGER = 10000
     PROCESSING_TIME = "10 seconds"
     
-    # Checkpoint & Storage
-    # CHECKPOINT_LOCATION = "/app/checkpoints/stock_streaming"
-    # OUTPUT_PATH = "/app/data/processed_stocks"
-    
     # Storage paths for medallion architecture
+    BRONZE_INIT_DELAY = 45
+    SILVER_INIT_DELAY = 45
     BASE_PATH = "/app/data"
-    CHECKPOINT_LOCATION = f"{BASE_PATH}/checkpoints"
-    OUTPUT_PATH = f"{BASE_PATH}/lake"
+    BRONZE_PATH = f"{BASE_PATH}/lake/bronze"  # ✅ Spécifique
+    SILVER_PATH = f"{BASE_PATH}/lake/silver"  # ✅ Spécifique  
+    GOLD_PATH = f"{BASE_PATH}/lake/gold"      # ✅ Spécifique
     
     # Windowing Configuration
     WINDOW_DURATION = "10 seconds"
@@ -53,6 +52,8 @@ class SparkConfig:
             "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog",
             "spark.databricks.delta.schema.autoMerge.enabled": str(SparkConfig.DELTA_MERGE_SCHEMA).lower(),
             
+            "spark.sql.streaming.checkpointLocation.root": "/app/data/checkpoints",
+            "spark.sql.streaming.minBatchesToRetain": "10",
             
             "spark.sql.streaming.schemaInference": "false",
             "spark.sql.adaptive.enabled": "true",
