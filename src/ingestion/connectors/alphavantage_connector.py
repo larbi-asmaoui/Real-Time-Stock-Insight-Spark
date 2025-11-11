@@ -10,7 +10,8 @@ import time
 from datetime import datetime
 import requests
 from ingestion.kafka_producer import FinanceLakeKafkaProducer
-import logging 
+import logging
+import os
 
 
 # Configure logging
@@ -20,7 +21,8 @@ logging.basicConfig(
     format='%(asctime)s %(levelname)s %(message)s'
 )
 
-ALPHAVANTAGE_API_KEY = "7UYREEDLILBZ2V93"
+ALPHAVANTAGE_API_KEY = "YOUR API KEY HERE"
+
 
 class AlphaVantageConnector:
     """
@@ -39,7 +41,7 @@ class AlphaVantageConnector:
         """
         self.api_key = api_key
         self.base_url = "https://www.alphavantage.co/query"
-        self.symbols = symbols or ["AAPL", "GOOG", "MSFT", "AMZN"]
+        self.symbols = symbols or ["AAPL", "GOOG", "MSFT", "AMZN", "TSLA"]
         self.interval = interval
         self.fetch_delay = fetch_delay
 
