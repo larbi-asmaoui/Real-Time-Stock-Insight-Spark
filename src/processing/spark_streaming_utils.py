@@ -5,7 +5,7 @@ def setup_logging():
         level=logging.INFO,
         format='%(asctime)s [%(levelname)s] %(name)s - %(message)s',
         handlers=[
-            logging.FileHandler('logs/spark_streaming.log'),
+            logging.FileHandler('logs/spark_streaming.log', mode='w'),
             logging.StreamHandler()
         ]
     )

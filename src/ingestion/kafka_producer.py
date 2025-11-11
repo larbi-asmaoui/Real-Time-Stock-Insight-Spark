@@ -14,7 +14,9 @@ import logging
 logging.basicConfig(
     filename='logs/kafka_producer.log',
     level=logging.INFO,
-    format='%(asctime)s %(levelname)s %(message)s'
+    format='%(asctime)s %(levelname)s %(message)s',
+    filemode='w'
+    
 )
 
 class FinanceLakeKafkaProducer:
