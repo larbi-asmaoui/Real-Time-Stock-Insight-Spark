@@ -18,7 +18,6 @@ parts/
 sdist/
 logs/
 .env
-*.env
 data/
 checkpoints/
 logs/
