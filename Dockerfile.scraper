@@ -9,10 +9,10 @@ COPY src /app/src
 RUN mkdir -p /app/logs && chmod 777 /app/logs
 
 # Install required packages
-RUN pip install requests kafka-python yfinance defeatbeta-api stockdex
+RUN pip install requests kafka-python yfinance defeatbeta-api stockdex dotenv
 
 # Set Python path to recognize modules
 ENV PYTHONPATH=/app/src:$PYTHONPATH
 
 # Update CMD to use correct path
-CMD ["python", "-u", "/app/src/ingestion/connectors/custom_connector.py"]
+CMD ["python", "-u", "/app/src/ingestion/connectors/yahoo_connector.py"]

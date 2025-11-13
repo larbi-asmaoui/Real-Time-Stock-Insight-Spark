@@ -16,7 +16,6 @@ class BronzeLayer:
         logger.info("🥉 BRONZE - Démarrage ingestion Kafka...")
         
         input_schema = self.schemas.get_input_schema()
-        
         # Lecture Kafka
         raw_df = (
             self.spark.readStream
@@ -29,7 +28,7 @@ class BronzeLayer:
             .load()
         )
         
-        # Parsing JSON
+        
         parsed_df = (
             raw_df
             .selectExpr(
@@ -37,10 +36,9 @@ class BronzeLayer:
                 "timestamp as kafka_timestamp"
             )
             .select(
-                from_json(col("json_data"), ArrayType(input_schema)).alias("data"),
+                from_json(col("json_data"), input_schema).alias("record"),
                 col("kafka_timestamp")
             )
-            .withColumn("record", explode(col("data")))
             .select(
                 "record.*",
                 col("kafka_timestamp").alias("ingestion_timestamp")

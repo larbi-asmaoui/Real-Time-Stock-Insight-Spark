@@ -11,7 +11,7 @@ COPY src /app/src
 RUN mkdir -p /app/logs /app/data /app/checkpoints
 
 # Install required packages
-RUN pip install kafka-python pyspark findspark delta-spark==2.4.0
+RUN pip install kafka-python pyspark findspark delta-spark==2.4.0 dotenv
 
 # Download Spark Kafka package
 RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.0/spark-sql-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/ && \

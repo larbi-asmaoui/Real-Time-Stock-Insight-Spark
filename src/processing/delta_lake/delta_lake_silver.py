@@ -18,6 +18,7 @@ class SilverLayer:
         bronze_df = (
             self.spark.readStream
             .format("delta")
+            .option("startingVersion", "0")
             .option("ignoreChanges", "true")  # Pour les updates
             .option("ignoreDeletes", "true")  # Pour les deletes
             .load(self.config.BRONZE_PATH)
