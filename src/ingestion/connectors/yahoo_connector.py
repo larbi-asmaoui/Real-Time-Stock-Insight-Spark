@@ -25,7 +25,6 @@ class YahooFinanceConnector:
         try:
             ticker = yf.Ticker(symbol)
             info = ticker.fast_info
-            logging.info(f"[FETCHED] {symbol} data: {info}")
             return {
                 "symbol": symbol,
                 "price": float(info.get("lastPrice", 0.0)),

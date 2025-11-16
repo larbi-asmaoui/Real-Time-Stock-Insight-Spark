@@ -1,35 +1,79 @@
+# FROM apache/spark-py:v3.4.0
+
+# USER root
+
+# WORKDIR /app
+
+# # Copy the src directory
+# COPY src /app/src
+
+# # Create necessary directories
+# RUN mkdir -p /app/logs /app/data /app/checkpoints
+
+# # Install required packages
+# RUN pip install kafka-python pyspark findspark delta-spark==2.4.0 dotenv
+
+# # Download Spark Kafka package
+# RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.0/spark-sql-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/ && \
+#     wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.0/kafka-clients-3.4.0.jar -P /opt/spark/jars/ && \
+#     wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar -P /opt/spark/jars/ && \
+#     wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.4.0/spark-token-provider-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/ && \
+#     wget https://repo1.maven.org/maven2/io/delta/delta-core_2.12/2.4.0/delta-core_2.12-2.4.0.jar -P /opt/spark/jars/ && \
+#     wget https://repo1.maven.org/maven2/io/delta/delta-storage/2.4.0/delta-storage-2.4.0.jar -P /opt/spark/jars/ && \
+#     wget https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.9.3/antlr4-runtime-4.9.3.jar -P /opt/spark/jars/
+
+
+# # Set environment variables
+# ENV PYTHONPATH=/app:/app/src:$PYTHONPATH
+# ENV SPARK_PACKAGES="org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0"
+
+# # The command to run the streaming job with explicit package inclusion
+# CMD ["spark-submit", \
+#     "--packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0", \
+#     "--driver-memory", "2g", \
+#     "--executor-memory", "2g", \
+#     "/app/src/processing/spark_streaming_main.py"]
+
 FROM apache/spark-py:v3.4.0
 
 USER root
 
 WORKDIR /app
 
-# Copy the src directory
+# First, copy and install Python requirements to leverage Docker cache
+COPY requirements-spark.txt .
+RUN pip install --no-cache-dir -r requirements-spark.txt
+
+COPY jars /opt/spark/jars/
+
+# Copy the source code
 COPY src /app/src
 
 # Create necessary directories
 RUN mkdir -p /app/logs /app/data /app/checkpoints
 
-# Install required packages
-RUN pip install kafka-python pyspark findspark delta-spark==2.4.0 dotenv
-
-# Download Spark Kafka package
-RUN wget https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.0/spark-sql-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/ && \
-    wget https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.0/kafka-clients-3.4.0.jar -P /opt/spark/jars/ && \
-    wget https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar -P /opt/spark/jars/ && \
-    wget https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.4.0/spark-token-provider-kafka-0-10_2.12-3.4.0.jar -P /opt/spark/jars/ && \
-    wget https://repo1.maven.org/maven2/io/delta/delta-core_2.12/2.4.0/delta-core_2.12-2.4.0.jar -P /opt/spark/jars/ && \
-    wget https://repo1.maven.org/maven2/io/delta/delta-storage/2.4.0/delta-storage-2.4.0.jar -P /opt/spark/jars/ && \
-    wget https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.9.3/antlr4-runtime-4.9.3.jar -P /opt/spark/jars/
-
+# Download all required Spark JARs in a single layer.
+# These will be automatically added to Spark's classpath.
+# RUN wget -P /opt/spark/jars/ \
+#     https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.4.0/spark-sql-kafka-0-10_2.12-3.4.0.jar && \
+#     wget -P /opt/spark/jars/ \
+#     https://repo1.maven.org/maven2/org/apache/kafka/kafka-clients/3.4.0/kafka-clients-3.4.0.jar && \
+#     wget -P /opt/spark/jars/ \
+#     https://repo1.maven.org/maven2/org/apache/commons/commons-pool2/2.11.1/commons-pool2-2.11.1.jar && \
+#     wget -P /opt/spark/jars/ \
+#     https://repo1.maven.org/maven2/org/apache/spark/spark-token-provider-kafka-0-10_2.12/3.4.0/spark-token-provider-kafka-0-10_2.12-3.4.0.jar && \
+#     wget -P /opt/spark/jars/ \
+#     https://repo1.maven.org/maven2/io/delta/delta-core_2.12/2.4.0/delta-core_2.12-2.4.0.jar && \
+#     wget -P /opt/spark/jars/ \
+#     https://repo1.maven.org/maven2/io/delta/delta-storage/2.4.0/delta-storage-2.4.0.jar && \
+#     wget -P /opt/spark/jars/ \
+#     https://repo1.maven.org/maven2/org/antlr/antlr4-runtime/4.9.3/antlr4-runtime-4.9.3.jar
 
 # Set environment variables
 ENV PYTHONPATH=/app:/app/src:$PYTHONPATH
-ENV SPARK_PACKAGES="org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0"
 
-# The command to run the streaming job with explicit package inclusion
+# The command to run the streaming job.
 CMD ["spark-submit", \
-    "--packages", "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0", \
     "--driver-memory", "2g", \
     "--executor-memory", "2g", \
     "/app/src/processing/spark_streaming_main.py"]
