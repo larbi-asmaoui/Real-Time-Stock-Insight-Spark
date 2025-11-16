@@ -21,6 +21,7 @@ class GoldLayer:
             self.spark.readStream
             .format("delta")
             # NE PAS FAIRE: .schema(silver_schema)
+            .option("startingVersion", "0")
             .option("ignoreChanges", "true")
             .option("ignoreDeletes", "true")
             .load(self.config.SILVER_PATH)

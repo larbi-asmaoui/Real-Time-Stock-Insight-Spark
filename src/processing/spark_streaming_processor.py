@@ -61,12 +61,19 @@ class StockStreamingProcessor:
         
         while waited < max_wait:
             if self._check_delta_table_exists(path):
-                logger.info(f"✅ {layer_name} prêt avec données!")
-                return True
+                try:
+                    test_df = self.spark.read.format("delta").load(path)
+                    schema = test_df.schema
+                    logger.info(f"✅ {layer_name} prêt avec schéma valide: {len(schema.fields)} colonnes")
+                    return True
+                except Exception as e:
+                    logger.warning(f"⚠️  {layer_name} existe mais schéma non lisible: {e}")
+            
             
             time.sleep(check_interval)
             waited += check_interval
-            logger.info(f"⏳ {layer_name}: {waited}/{max_wait}s écoulés...")
+            if waited % 30 == 0:
+                logger.info(f"⏳ {layer_name}: {waited}/{max_wait}s écoulés...")
         
         logger.warning(f"⚠️  Timeout: {layer_name} toujours vide après {max_wait}s")
         return False
@@ -107,27 +114,28 @@ class StockStreamingProcessor:
             if not self._wait_for_data(
                 self.config.BRONZE_PATH, 
                 "Bronze", 
-                max_wait=120,
-                check_interval=15
+                max_wait=180,
+                check_interval=5
             ):
                 logger.warning("⚠️  Bronze démarre sans données Kafka - continuons...")
             
             # ===== ÉTAPE 2: SILVER =====
             logger.info("\n🚀 ÉTAPE 2/3: Lancement Silver...")
             self.create_silver_stream()
-            
+            time.sleep(10)
             # Attendre que Silver écrive des données
             if not self._wait_for_data(
                 self.config.SILVER_PATH,
                 "Silver",
                 max_wait=120,
-                check_interval=15
+                check_interval=5
             ):
                 logger.warning("⚠️  Silver démarre sans données Bronze - continuons...")
             
             # ===== ÉTAPE 3: GOLD =====
             logger.info("\n🚀 ÉTAPE 3/3: Lancement Gold...")
             self.create_gold_stream()
+            time.sleep(10)
             
             logger.info("\n" + "=" * 70)
             logger.info("✅ PIPELINE COMPLET ACTIF!")

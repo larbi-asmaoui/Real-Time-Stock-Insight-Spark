@@ -1,0 +1,5 @@
+kafka-python
+pyspark
+findspark
+dotenv
+delta-spark==2.4.0

@@ -1,14 +1,11 @@
-"""
-Kafka Producer Utility for FinanceLake
---------------------------------------
-Centralized module to send data from any connector to Kafka.
-
-Create by: A
-"""
-
 import json
+from dotenv import load_dotenv
 from kafka import KafkaProducer
 import logging
+import os
+
+
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(
@@ -20,22 +17,14 @@ logging.basicConfig(
 )
 
 class FinanceLakeKafkaProducer:
-    """
-    Handles Kafka message production in a standardized way for FinanceLake.
-    """
-
-    def __init__(self, broker="kafka:9092", topic="stock_prices"):
-        """
-        :param broker: Kafka broker address (default: kafka:9092)
-        :param topic: Kafka topic to publish messages to
-        """
-        self.broker = broker
-        self.topic = topic
+   
+    def __init__(self):
+        self.broker = os.getenv("KAFKA_BROKER", "kafka:29092")
+        self.topic = os.getenv("TOPIC_NAME", "stock_prices")
 
         try:
             self.producer = KafkaProducer(
                 bootstrap_servers=[self.broker],
-                # bootstrap_servers= ["localhost:9092"],
                 value_serializer=lambda v: json.dumps(v).encode("utf-8"),
                 retries=3,
                 request_timeout_ms=30000,
@@ -47,10 +36,6 @@ class FinanceLakeKafkaProducer:
             self.producer = None
 
     def send(self, data: dict):
-        """
-        Sends a JSON message to the Kafka topic.
-        :param data: dictionary to send
-        """
         if not self.producer:
             logging.error("[ERROR] Producer not initialized.")
             return
@@ -62,7 +47,6 @@ class FinanceLakeKafkaProducer:
             logging.error(f"[ERROR] Failed to send message: {e}")
 
     def close(self):
-        """Flush and close the producer."""
         if self.producer:
             self.producer.flush()
             self.producer.close()
