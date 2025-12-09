@@ -1,52 +1,33 @@
+import os
+import sys
 from pyspark.sql import SparkSession, functions as F
 from pyspark.sql.window import Window
 from pyspark.ml.feature import VectorAssembler
-from pyspark.ml.classification import RandomForestClassifier, LogisticRegression
 from pyspark.ml import Pipeline
 from pyspark.ml.evaluation import BinaryClassificationEvaluator
 
+from delta import configure_spark_with_delta_pip
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+from ml.config import MLConfig
+from ml.utils import setup_ml_logging
+
+
 class StockPredictor:
 
-    def __init__(self, spark, config):
         self.spark = spark
         self.config = config
+        self.logger = setup_ml_logging()
 
-    # ==========================================================
-    # 1️⃣ Lecture données GOLD
-    # ==========================================================
     def load_gold(self):
-        print("📥 Loading GOLD data...")
-        df = (
-            self.spark.read
-            .format("delta")
-            .load(self.config.GOLD_PATH)
-        )
         return df
 
-    # ==========================================================
-    # 2️⃣ Feature engineering (ML)
-    # ==========================================================
     def build_features(self, df):
 
-        print("🛠 Building ML features...")
 
         w = Window.partitionBy("symbol").orderBy("window_end")
 
-        # Label: 1 si next_price > avg_price
-        df = df.withColumn("next_price", F.lead("avg_price", 1).over(w))
-        df = df.withColumn("label",
-                           (F.col("next_price") > F.col("avg_price")).cast("int"))
 
-        # Momentum
-        df = df.withColumn("prev_price", F.lag("avg_price", 1).over(w))
-        df = df.withColumn("momentum",
-                           F.col("avg_price") - F.col("prev_price"))
-
-        # Moving average MA(4)
-        w4 = w.rowsBetween(-3, 0)
-        df = df.withColumn("ma_4", F.avg("avg_price").over(w4))
-
-        # Nettoyage valeurs nulles
         df = df.fillna({
             "volatility": 0.0,
             "momentum": 0.0,
@@ -54,7 +35,6 @@ class StockPredictor:
             "avg_price_change_pct": 0.0
         })
 
-        # Dataset final ML
         df_ml = df.select(
             "symbol",
             "avg_price",
@@ -64,18 +44,20 @@ class StockPredictor:
             "ma_4",
             "avg_price_change_pct",
             "label"
-        ).dropna()
+        )
 
+        df_ml = df_ml.na.drop(subset=["label"])
+        
+        self.logger.info(f"📐 Final ML dataset: {df_ml.count()} rows")
         return df_ml
 
-    # ==========================================================
-    # 3️⃣ Training RandomForest
-    # ==========================================================
+    # ---------------------------------------------------------
+    # 3) Train model
+    # ---------------------------------------------------------
     def train_model(self, df_ml):
 
-        print("🤖 Training RandomForest model...")
+        self.logger.info("🤖 Training RandomForest...")
 
-        # Assemble features into vector
         assembler = VectorAssembler(
             inputCols=[
                 "avg_price",
@@ -88,41 +70,49 @@ class StockPredictor:
             outputCol="features"
         )
 
-        rf = RandomForestClassifier(
-            labelCol="label",
-            featuresCol="features",
-            numTrees=50
-        )
+        rf = RandomForestClassifier(labelCol="label", featuresCol="features", numTrees=5)
 
         pipeline = Pipeline(stages=[assembler, rf])
 
         train, test = df_ml.randomSplit([0.7, 0.3], seed=42)
 
         model = pipeline.fit(train)
-
         predictions = model.transform(test)
 
         evaluator = BinaryClassificationEvaluator(
-            labelCol="label",
-            rawPredictionCol="rawPrediction",
-            metricName="areaUnderROC"
+            labelCol="label", rawPredictionCol="rawPrediction"
         )
 
         auc = evaluator.evaluate(predictions)
+        self.logger.info(f"📊 AUC = {auc:.4f}")
 
-        print(f"📊 Model AUC = {auc:.4f}")
-
-        # Sauvegarde modèle en Delta Lake / MLlib format
-        model.save(self.config.ML_MODEL_PATH)
-
-        print(f"💾 Model saved to {self.config.ML_MODEL_PATH}")
+        model.write().overwrite().save(self.config.MODEL_PATH)
+        self.logger.info(f"💾 Model saved to {self.config.MODEL_PATH}")
 
         return model, auc
 
-    # ==========================================================
-    # 4️⃣ Execute full ML pipeline
-    # ==========================================================
+    # ---------------------------------------------------------
+    # 4) Full pipeline
+    # ---------------------------------------------------------
     def run(self):
         df_gold = self.load_gold()
         df_ml = self.build_features(df_gold)
         return self.train_model(df_ml)
+
+
+if __name__ == "__main__":
+    print("🚀 Starting ML Pipeline...")
+
+    builder = (
+        SparkSession.builder
+            .appName("StockPredictor")
+            .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension")
+            .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog")
+    )
+
+    spark = configure_spark_with_delta_pip(builder).getOrCreate()
+
+    config = MLConfig()
+    predictor = StockPredictor(spark, config)
+
+    predictor.run()

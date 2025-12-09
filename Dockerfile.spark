@@ -52,6 +52,8 @@ COPY src /app/src
 # Create necessary directories
 RUN mkdir -p /app/logs /app/data /app/checkpoints
 
+RUN pip install numpy pandas
+
 # Download all required Spark JARs in a single layer.
 # These will be automatically added to Spark's classpath.
 # RUN wget -P /opt/spark/jars/ \
