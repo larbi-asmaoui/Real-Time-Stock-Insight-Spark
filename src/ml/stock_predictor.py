@@ -3,6 +3,7 @@ import sys
 from pyspark.sql import SparkSession, functions as F
 from pyspark.sql.window import Window
 from pyspark.ml.feature import VectorAssembler
+from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml import Pipeline
 from pyspark.ml.evaluation import BinaryClassificationEvaluator
 
@@ -15,18 +16,42 @@ from ml.utils import setup_ml_logging
 
 class StockPredictor:
 
+    def __init__(self, spark, config: MLConfig):
         self.spark = spark
         self.config = config
         self.logger = setup_ml_logging()
 
+    # ---------------------------------------------------------
+    # 1) Load GOLD
+    # ---------------------------------------------------------
     def load_gold(self):
+        self.logger.info("📥 Loading GOLD Delta table...")
+
+        df = self.spark.read.format("delta").load(self.config.GOLD_PATH)
+
+        count = df.count()
+        if count == 0:
+            raise ValueError("❌ GOLD table is empty!")
+
+        self.logger.info(f"✅ Loaded {count} rows from GOLD")
         return df
 
+    # ---------------------------------------------------------
+    # 2) Feature Engineering
+    # ---------------------------------------------------------
     def build_features(self, df):
 
+        self.logger.info("🛠 Building ML features...")
 
         w = Window.partitionBy("symbol").orderBy("window_end")
 
+        df = (
+            df.withColumn("next_price", F.lead("avg_price").over(w))
+              .withColumn("label", (F.col("next_price") > F.col("avg_price")).cast("int"))
+              .withColumn("prev_price", F.lag("avg_price").over(w))
+              .withColumn("momentum", F.col("avg_price") - F.col("prev_price"))
+              .withColumn("ma_4", F.avg("avg_price").over(w.rowsBetween(-3, 0)))
+        )
 
         df = df.fillna({
             "volatility": 0.0,
