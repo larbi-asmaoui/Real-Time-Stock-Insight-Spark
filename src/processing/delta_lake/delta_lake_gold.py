@@ -1,37 +1,49 @@
+from pyspark.sql import DataFrame
 from pyspark.sql.functions import (
     col, current_timestamp, window, count, avg, 
     min as spark_min, max as spark_max, sum as spark_sum, 
     stddev, round as spark_round
 )
+from processing.abstraction import StreamLayer
 from processing.spark_streaming_utils import setup_logging
 
 logger = setup_logging()
 
-class GoldLayer:
-    def __init__(self, spark, config, schemas):
-        self.spark = spark
-        self.config = config
-        self.schemas = schemas
+class GoldLayer(StreamLayer):
+    """
+    Gold Layer: Aggregations and Business Metrics.
+    """
     
-    def create_stream(self):
-        logger.info("🥇 GOLD - Agrégations business...")
-        
-        # 🔑 FIX: Delta infère le schéma automatiquement
-        silver_df = (
+    def __init__(self, spark, config, schemas):
+        super().__init__(spark, config)
+        self.schemas = schemas
+
+    @property
+    def layer_name(self) -> str:
+        return "gold"
+
+    @property
+    def output_path(self) -> str:
+        return self.config.GOLD_PATH
+    
+    @property
+    def checkpoint_path(self) -> str:
+        return f"{self.config.BASE_PATH}/checkpoints/gold"
+
+    def read(self) -> DataFrame:
+        logger.info("GOLD - Reading from Silver...")
+        return (
             self.spark.readStream
             .format("delta")
-            # NE PAS FAIRE: .schema(silver_schema)
             .option("startingVersion", "0")
             .option("ignoreChanges", "true")
             .option("ignoreDeletes", "true")
             .load(self.config.SILVER_PATH)
         )
-        
-        logger.info(f"✅ Lecture Silver → {self.config.SILVER_PATH}")
-        
-        # Agrégations avec fenêtres
-        gold_df = (
-            silver_df
+
+    def transform(self, df: DataFrame) -> DataFrame:
+        return (
+            df
             .filter(col("is_anomaly") == False)
             .withWatermark("timestamp", self.config.WATERMARK_DELAY)
             
@@ -63,19 +75,3 @@ class GoldLayer:
             )
             .withColumn("gold_computed_at", current_timestamp())
         )
-        
-        # Native Delta Sink (Optimized)
-        query = (
-            gold_df.writeStream
-            .format("delta")
-            .outputMode("append") # Aggregations output append with watermark
-            .option("mergeSchema", "true")
-            .partitionBy("symbol")
-            .option("checkpointLocation", f"{self.config.BASE_PATH}/checkpoints/gold")
-            .trigger(processingTime=self.config.PROCESSING_TIME)
-            .queryName("gold_aggregations")
-            .start(self.config.GOLD_PATH)
-        )
-        
-        logger.info(f"✅ Gold actif → {self.config.GOLD_PATH}")
-        return query

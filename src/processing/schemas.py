@@ -1,6 +1,6 @@
 """
-Schémas de données pour Spark Streaming
-BEST PRACTICE: Définir explicitement tous les schémas
+Data Schemas for Spark Streaming
+BEST PRACTICE: Explicitly define all schemas
 """
 
 from pyspark.sql.types import (
@@ -9,11 +9,11 @@ from pyspark.sql.types import (
 )
 
 class StockSchemas:
-    """Définition centralisée des schémas"""
+    """Centralized schema definition"""
     
     @staticmethod
     def get_input_schema():
-        """Schéma des messages Kafka entrants"""
+        """Schema for incoming Kafka messages"""
         return StructType([
             StructField("symbol", StringType(), False),
             StructField("price", DoubleType(), False),
@@ -26,7 +26,7 @@ class StockSchemas:
     
     @staticmethod
     def get_aggregated_schema():
-        """Schéma des données agrégées"""
+        """Schema for aggregated data"""
         return StructType([
             StructField("window_start", TimestampType(), False),
             StructField("window_end", TimestampType(), False),

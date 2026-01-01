@@ -1,15 +1,15 @@
 """
-Configuration centrale pour Spark Streaming
-BEST PRACTICE: Séparer la configuration du code métier
+Central Configuration for Spark Streaming
+BEST PRACTICE: Separate configuration from business logic
 """
 
 class SparkConfig:
-    """Configuration Spark optimisée pour streaming financier"""
+    """Optimized Spark Configuration for Financial Streaming"""
     
     # Kafka Configuration
     KAFKA_BROKERS = "kafka:29092"
     KAFKA_TOPIC = "stock_prices"
-    KAFKA_STARTING_OFFSETS = "latest"  # ou "earliest" pour historique
+    KAFKA_STARTING_OFFSETS = "earliest"  # or "earliest" for history
     
     # Spark Configuration
     APP_NAME = "StockInsightStreaming"
@@ -23,9 +23,9 @@ class SparkConfig:
     BRONZE_INIT_DELAY = 45
     SILVER_INIT_DELAY = 45
     BASE_PATH = "/app/data"
-    BRONZE_PATH = f"{BASE_PATH}/lake/bronze"  # ✅ Spécifique
-    SILVER_PATH = f"{BASE_PATH}/lake/silver"  # ✅ Spécifique  
-    GOLD_PATH = f"{BASE_PATH}/lake/gold"      # ✅ Spécifique
+    BRONZE_PATH = f"{BASE_PATH}/lake/bronze"
+    SILVER_PATH = f"{BASE_PATH}/lake/silver"
+    GOLD_PATH = f"{BASE_PATH}/lake/gold"
     
     # Windowing Configuration
     WINDOW_DURATION = "10 seconds"
@@ -42,7 +42,7 @@ class SparkConfig:
     
     @staticmethod
     def get_spark_configs():
-        """Retourne un dict de configurations Spark"""
+        """Returns a dict of Spark configurations"""
         return {
            
             "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0",

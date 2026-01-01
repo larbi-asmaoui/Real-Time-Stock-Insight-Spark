@@ -1,23 +1,34 @@
-from pyspark.sql.functions import (
-    col, from_json, explode, current_timestamp
-)
-from pyspark.sql.types import ArrayType
+from pyspark.sql import DataFrame
+from pyspark.sql.functions import col, from_json, current_timestamp
+from processing.abstraction import StreamLayer
 from processing.spark_streaming_utils import setup_logging
 
 logger = setup_logging()
 
-class BronzeLayer:
-    def __init__(self, spark, config, schemas):
-        self.spark = spark
-        self.config = config
-        self.schemas = schemas
+class BronzeLayer(StreamLayer):
+    """
+    Bronze Layer: Raw Ingestion from Kafka.
+    """
     
-    def create_stream(self):
-        logger.info("🥉 BRONZE - Démarrage ingestion Kafka...")
-        
-        input_schema = self.schemas.get_input_schema()
-        # Lecture Kafka
-        raw_df = (
+    def __init__(self, spark, config, schemas):
+        super().__init__(spark, config)
+        self.schemas = schemas # Only specific dependency needed
+
+    @property
+    def layer_name(self) -> str:
+        return "bronze"
+    
+    @property
+    def output_path(self) -> str:
+        return self.config.BRONZE_PATH
+    
+    @property
+    def checkpoint_path(self) -> str:
+        return f"{self.config.BASE_PATH}/checkpoints/bronze"
+
+    def read(self) -> DataFrame:
+        logger.info("BRONZE - Reading from Kafka...")
+        return (
             self.spark.readStream
             .format("kafka")
             .option("kafka.bootstrap.servers", self.config.KAFKA_BROKERS)
@@ -27,10 +38,49 @@ class BronzeLayer:
             .option("maxOffsetsPerTrigger", self.config.MAX_OFFSETS_PER_TRIGGER)
             .load()
         )
+
+    def bootstrap(self) -> bool:
+        """
+        Initialize Bronze Delta table with empty DataFrame if not exists.
+        """
+        from delta.tables import DeltaTable
+        if not DeltaTable.isDeltaTable(self.spark, self.output_path):
+            logger.info(f"Bootstrapping Bronze Table at {self.output_path}...")
+            # Create schema manually based on transform logic
+            try:
+                from pyspark.sql.types import TimestampType
+                
+                # Get base schema from schemas.py
+                schema = self.schemas.get_input_schema()
+                
+                # Add extra columns added in transform
+                schema = schema.add("ingestion_timestamp", TimestampType())
+                schema = schema.add("bronze_inserted_at", TimestampType())
+                
+                # Create empty DF
+                empty_df = self.spark.createDataFrame([], schema)
+                
+                # Write to Delta
+                (
+                    empty_df.write
+                    .format("delta")
+                    .mode("ignore")
+                    .partitionBy("symbol")
+                    .option("mergeSchema", "true")
+                    .save(self.output_path)
+                )
+                logger.info("Bronze Table bootstrapped successfully.")
+                return True
+            except Exception as e:
+                logger.error(f"Failed to bootstrap Bronze: {e}")
+                return False
+        return True
+
+    def transform(self, df: DataFrame) -> DataFrame:
+        input_schema = self.schemas.get_input_schema()
         
-        
-        parsed_df = (
-            raw_df
+        return (
+            df
             .selectExpr(
                 "CAST(value AS STRING) as json_data",
                 "timestamp as kafka_timestamp"
@@ -45,19 +95,3 @@ class BronzeLayer:
             )
             .withColumn("bronze_inserted_at", current_timestamp())
         )
-        
-        # Native Delta Sink (Optimized)
-        query = (
-            parsed_df.writeStream
-            .format("delta")
-            .outputMode("append")
-            .option("mergeSchema", "true")
-            .partitionBy("symbol")
-            .option("checkpointLocation", f"{self.config.BASE_PATH}/checkpoints/bronze")
-            .trigger(processingTime=self.config.PROCESSING_TIME)
-            .queryName("bronze_ingestion")
-            .start(self.config.BRONZE_PATH)
-        )
-        
-        logger.info(f"✅ Bronze actif → {self.config.BRONZE_PATH}")
-        return query

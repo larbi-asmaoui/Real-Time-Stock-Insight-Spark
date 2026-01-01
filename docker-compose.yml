@@ -84,8 +84,7 @@ services:
       dockerfile: Dockerfile.spark
     container_name: spark-streaming
     depends_on:
-      kafka:
-        condition: service_healthy
+      - kafka
     ports:
       - "4040:4040" # Spark UI
     environment:
@@ -96,7 +95,7 @@ services:
       - ./logs:/app/logs
       - ./data:/app/data
       - ./checkpoints:/app/checkpoints
-    command: ["/bin/bash", "/app/src/run_pipeline.sh"]
+    # command: ["/bin/bash", "/app/src/run_pipeline.sh"]
 
   scraper:
     build:

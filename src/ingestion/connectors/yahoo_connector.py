@@ -17,7 +17,7 @@ logging.basicConfig(
 
 class YahooFinanceConnector:
     def __init__(self, symbols=None, interval=5):
-        self.symbols = symbols or ["AAPL", "GOOG", "AMZN", "MSFT", "TSLA", "FB", "NFLX"]
+        self.symbols = symbols or ["AAPL", "GOOG", "AMZN", "MSFT", "TSLA", "META", "NFLX"]
         self.interval = interval
         self.queue = asyncio.Queue()
         self.producer = FinanceLakeKafkaProducer()
@@ -29,17 +29,26 @@ class YahooFinanceConnector:
         """
         try:
             ticker = yf.Ticker(symbol)
-            info = ticker.fast_info
-            # yfinance fast_info access might be blocking or just property access, 
-            # generally safe to wrap if network calls are involved implicitly.
+            info = ticker.info
+            # info_dict = dict(info)
+            # logging.info(f"{info_dict}")
+            # logging.info(f"{info_dict.last_trade_time}")
+# 2026-01-01 14:52:36,986 INFO [INFO] Fetch TSLA: lazy-loading dict with keys = ['currency', 'dayHigh', 'dayLow', 'exchange', 'fiftyDayAverage', 'lastPrice', 'lastVolume', 'marketCap', 'open', 'previousClose', 'quoteType', 'regularMarketPreviousClose', 'shares', 'tenDayAverageVolume', 'threeMonthAverageVolume', 'timezone', 'twoHundredDayAverage', 'yearChange', 'yearHigh', 'yearLow']
+
+            # logging.info(f"[INFO] Fetch {symbol}: {info}")  
+            # yfinance info is a dict, keys are camelCase
             return {
                 "symbol": symbol,
-                "price": float(info.last_price), # Corrected property name from lastPrice to last_price for fast_info
-                "open": float(info.open),
-                "high": float(info.day_high),
-                "low": float(info.day_low),
-                "volume": int(info.last_volume),
-                "timestamp": datetime.now(timezone.utc).isoformat(),
+                "currency": info.get("currency", "USD"),
+                "exchange": info.get("exchange", "UNKNOWN"),
+                "price": float(info.get("currentPrice", 0.0) or 0.0),
+                "open": float(info.get("open", 0.0) or 0.0),
+                "high": float(info.get("dayHigh", 0.0) or 0.0),
+                "low": float(info.get("dayLow", 0.0) or 0.0),
+                "volume": int(info.get("regularMarketVolume", 0) or info.get("volume", 0) or 0),
+                "market_cap": int(info.get("marketCap", 0) or 0),
+                "timestamp": info.get("regularMarketTime"),
+                
             }
         except Exception as e:
             logging.error(f"[ERROR] Fetch {symbol}: {e}")
