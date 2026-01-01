@@ -17,7 +17,7 @@ class SparkConfig:
     
     # Performance Tuning
     MAX_OFFSETS_PER_TRIGGER = 10000
-    PROCESSING_TIME = "10 seconds"
+    PROCESSING_TIME = "0 seconds" # Minimize latency
     
     # Storage paths for medallion architecture
     BRONZE_INIT_DELAY = 45

@@ -53,41 +53,22 @@ class SilverLayer:
             )
             
             .withColumn("silver_processed_at", current_timestamp())
+            # FIX: Added watermark to limit state size for dropDuplicates
+            .withWatermark("timestamp", "10 minutes")
             .dropDuplicates(["symbol", "timestamp"])
         )
         
-        # Écriture Silver
-        def write_silver(batch_df, batch_id):
-            if batch_df.isEmpty():
-                logger.info(f"📦 Silver batch {batch_id}: vide")
-                return
-                
-            count = batch_df.count()
-            anomalies = batch_df.filter(col("is_anomaly") == True).count()
-            
-            logger.info(f"📦 Silver batch {batch_id}: {count} records ({anomalies} anomalies)")
-            
-            try:
-                (
-                    batch_df.write
-                    .format("delta")
-                    .mode("append")
-                    .partitionBy("symbol")
-                    .option("mergeSchema", "true")
-                    .save(self.config.SILVER_PATH)
-                )
-                logger.info(f"✅ Silver batch {batch_id} écrit avec succès")
-            except Exception as e:
-                logger.error(f"❌ Erreur Silver batch {batch_id}: {e}")
-                raise
-        
+        # Native Delta Sink (Optimized)
         query = (
             silver_df.writeStream
-            .foreachBatch(write_silver)
-            .trigger(processingTime=self.config.PROCESSING_TIME)
+            .format("delta")
+            .outputMode("append")
+            .option("mergeSchema", "true")
+            .partitionBy("symbol")
             .option("checkpointLocation", f"{self.config.BASE_PATH}/checkpoints/silver")
+            .trigger(processingTime=self.config.PROCESSING_TIME)
             .queryName("silver_enrichment")
-            .start()
+            .start(self.config.SILVER_PATH)
         )
         
         logger.info(f"✅ Silver actif → {self.config.SILVER_PATH}")

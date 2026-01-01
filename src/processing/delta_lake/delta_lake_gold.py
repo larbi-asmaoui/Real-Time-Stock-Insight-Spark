@@ -64,38 +64,17 @@ class GoldLayer:
             .withColumn("gold_computed_at", current_timestamp())
         )
         
-        # Écriture Gold
-        def write_gold(batch_df, batch_id):
-            if batch_df.isEmpty():
-                logger.info(f"📦 Gold batch {batch_id}: vide")
-                return
-                
-            count = batch_df.count()
-            symbols = batch_df.select("symbol").distinct().count()
-            
-            logger.info(f"📦 Gold batch {batch_id}: {count} fenêtres, {symbols} symboles")
-            
-            try:
-                (
-                    batch_df.write
-                    .format("delta")
-                    .mode("append")
-                    .partitionBy("symbol")
-                    .option("mergeSchema", "true")
-                    .save(self.config.GOLD_PATH)
-                )
-                logger.info(f"✅ Gold batch {batch_id} écrit avec succès")
-            except Exception as e:
-                logger.error(f"❌ Erreur Gold batch {batch_id}: {e}")
-                raise
-        
+        # Native Delta Sink (Optimized)
         query = (
             gold_df.writeStream
-            .foreachBatch(write_gold)
-            .trigger(processingTime=self.config.PROCESSING_TIME)
+            .format("delta")
+            .outputMode("append") # Aggregations output append with watermark
+            .option("mergeSchema", "true")
+            .partitionBy("symbol")
             .option("checkpointLocation", f"{self.config.BASE_PATH}/checkpoints/gold")
+            .trigger(processingTime=self.config.PROCESSING_TIME)
             .queryName("gold_aggregations")
-            .start()
+            .start(self.config.GOLD_PATH)
         )
         
         logger.info(f"✅ Gold actif → {self.config.GOLD_PATH}")

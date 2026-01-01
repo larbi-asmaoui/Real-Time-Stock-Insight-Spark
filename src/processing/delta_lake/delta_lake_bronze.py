@@ -46,36 +46,17 @@ class BronzeLayer:
             .withColumn("bronze_inserted_at", current_timestamp())
         )
         
-        # Écriture Bronze avec foreachBatch
-        def write_bronze(batch_df, batch_id):
-            if batch_df.isEmpty():
-                logger.info(f"📦 Bronze batch {batch_id}: vide (aucune donnée Kafka)")
-                return
-                
-            count = batch_df.count()
-            logger.info(f"📦 Bronze batch {batch_id}: {count} records")
-            
-            try:
-                (
-                    batch_df.write
-                    .format("delta")
-                    .mode("append")
-                    .partitionBy("symbol")
-                    .option("mergeSchema", "true")
-                    .save(self.config.BRONZE_PATH)
-                )
-                logger.info(f"✅ Bronze batch {batch_id} écrit avec succès")
-            except Exception as e:
-                logger.error(f"❌ Erreur Bronze batch {batch_id}: {e}")
-                raise
-        
+        # Native Delta Sink (Optimized)
         query = (
             parsed_df.writeStream
-            .foreachBatch(write_bronze)
-            .trigger(processingTime=self.config.PROCESSING_TIME)
+            .format("delta")
+            .outputMode("append")
+            .option("mergeSchema", "true")
+            .partitionBy("symbol")
             .option("checkpointLocation", f"{self.config.BASE_PATH}/checkpoints/bronze")
+            .trigger(processingTime=self.config.PROCESSING_TIME)
             .queryName("bronze_ingestion")
-            .start()
+            .start(self.config.BRONZE_PATH)
         )
         
         logger.info(f"✅ Bronze actif → {self.config.BRONZE_PATH}")

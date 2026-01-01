@@ -20,5 +20,4 @@ logs/
 .env
 data/
 checkpoints/
-logs/
-jars/
+# logs/
