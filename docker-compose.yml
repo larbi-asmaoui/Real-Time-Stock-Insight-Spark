@@ -68,8 +68,8 @@ services:
     environment:
       - SPARK_MODE=worker
       - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=1G
-      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=2G
+      - SPARK_WORKER_CORES=2
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
       - SPARK_RPC_ENCRYPTION_ENABLED=no
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
@@ -90,6 +90,7 @@ services:
     environment:
       - PYTHONPATH=/app/src
       - SPARK_MODE=standalone
+      - SPARK_DRIVER_MEMORY=1G
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
@@ -112,6 +113,21 @@ services:
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: dashboard
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./src:/app/src
+      - ./data:/app/data
+    environment:
+      - PYTHONPATH=/app/src
+    depends_on:
+      - spark-streaming
 
 volumes:
   data_volume:

@@ -22,6 +22,7 @@ class YahooFinanceConnector:
         self.queue = asyncio.Queue()
         self.producer = FinanceLakeKafkaProducer()
         self.executor = ThreadPoolExecutor(max_workers=len(self.symbols))
+        self.last_seen = {}
 
     def fetch_sync(self, symbol):
         """
@@ -71,6 +72,15 @@ class YahooFinanceConnector:
 
             for result in results:
                 if result:
+                    symbol = result["symbol"]
+                    timestamp = result["timestamp"]
+                    
+                    # Deduplication
+                    if self.last_seen.get(symbol) == timestamp:
+                        logging.debug(f"[SKIP] Duplicate data for {symbol} at {timestamp}")
+                        continue
+                        
+                    self.last_seen[symbol] = timestamp
                     await self.queue.put(result)
             
             elapsed = time.time() - start_time

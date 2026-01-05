@@ -94,4 +94,6 @@ class BronzeLayer(StreamLayer):
                 col("kafka_timestamp").alias("ingestion_timestamp")
             )
             .withColumn("bronze_inserted_at", current_timestamp())
+            .withWatermark("timestamp", "1 minute")
+            .dropDuplicates(["symbol", "timestamp"])
         )

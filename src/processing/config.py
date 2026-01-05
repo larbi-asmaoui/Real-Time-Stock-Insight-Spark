@@ -33,7 +33,7 @@ class SparkConfig:
     WATERMARK_DELAY = "1 minute"
     
     # Spark SQL Optimization
-    SHUFFLE_PARTITIONS = 200
+    SHUFFLE_PARTITIONS = 4
     ADAPTIVE_ENABLED = True
     
     # Delta Lake Configuration

@@ -38,6 +38,9 @@ class AlphaVantageConnector:
         
         # Internal async queue for producer-consumer pattern
         self.queue = asyncio.Queue()
+        
+        # State tracking for deduplication
+        self.last_seen = {}
 
         self.producer = FinanceLakeKafkaProducer(
             topic="stock_prices"
@@ -73,6 +76,16 @@ class AlphaVantageConnector:
 
                 # Get the latest timestamp
                 latest_ts = sorted(time_series.keys())[-1]
+                
+                # Deduplication logic
+                last_ts = self.last_seen.get(symbol)
+                if last_ts == latest_ts:
+                    logging.debug(f"[SKIP] Duplicate data for {symbol} at {latest_ts}")
+                    return None
+                
+                # Update state
+                self.last_seen[symbol] = latest_ts
+                
                 values = time_series[latest_ts]
 
                 record = {
