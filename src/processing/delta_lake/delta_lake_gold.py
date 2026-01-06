@@ -2,7 +2,7 @@ from pyspark.sql import DataFrame
 from pyspark.sql.functions import (
     col, current_timestamp, window, count, avg, 
     min as spark_min, max as spark_max, sum as spark_sum, 
-    stddev, round as spark_round
+    stddev, round as spark_round, coalesce, lit
 )
 from processing.abstraction import StreamLayer
 from processing.spark_streaming_utils import setup_logging
@@ -57,7 +57,7 @@ class GoldLayer(StreamLayer):
                 spark_round(spark_min("price"), 2).alias("min_price"),
                 spark_round(spark_max("price"), 2).alias("max_price"),
                 spark_sum("volume").alias("total_volume"),
-                spark_round(stddev("price"), 4).alias("volatility"),
+                spark_round(coalesce(stddev("price"), lit(0.0)), 4).alias("volatility"),
                 spark_round(avg("price_change_pct"), 2).alias("avg_price_change_pct")
             )
             

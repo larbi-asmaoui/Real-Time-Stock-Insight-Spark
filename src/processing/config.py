@@ -30,7 +30,7 @@ class SparkConfig:
     # Windowing Configuration
     WINDOW_DURATION = "10 seconds"
     SLIDE_DURATION = "5 seconds"  # Overlapping windows
-    WATERMARK_DELAY = "1 minute"
+    WATERMARK_DELAY = "5 seconds"
     
     # Spark SQL Optimization
     SHUFFLE_PARTITIONS = 4
