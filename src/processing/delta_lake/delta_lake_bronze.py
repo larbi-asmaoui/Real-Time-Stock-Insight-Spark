@@ -2,17 +2,15 @@ from pyspark.sql import DataFrame
 from pyspark.sql.functions import col, from_json, current_timestamp
 from processing.abstraction import StreamLayer
 from processing.spark_streaming_utils import setup_logging
+from pyspark.sql.types import TimestampType
+from delta.tables import DeltaTable
 
 logger = setup_logging()
 
 class BronzeLayer(StreamLayer):
-    """
-    Bronze Layer: Raw Ingestion from Kafka.
-    """
-    
     def __init__(self, spark, config, schemas):
         super().__init__(spark, config)
-        self.schemas = schemas # Only specific dependency needed
+        self.schemas = schemas
 
     @property
     def layer_name(self) -> str:
@@ -40,15 +38,9 @@ class BronzeLayer(StreamLayer):
         )
 
     def bootstrap(self) -> bool:
-        """
-        Initialize Bronze Delta table with empty DataFrame if not exists.
-        """
-        from delta.tables import DeltaTable
         if not DeltaTable.isDeltaTable(self.spark, self.output_path):
             logger.info(f"Bootstrapping Bronze Table at {self.output_path}...")
-            # Create schema manually based on transform logic
             try:
-                from pyspark.sql.types import TimestampType
                 
                 # Get base schema from schemas.py
                 schema = self.schemas.get_input_schema()

@@ -10,10 +10,6 @@ from processing.spark_streaming_utils import setup_logging
 logger = setup_logging()
 
 class GoldLayer(StreamLayer):
-    """
-    Gold Layer: Aggregations and Business Metrics.
-    """
-    
     def __init__(self, spark, config, schemas):
         super().__init__(spark, config)
         self.schemas = schemas

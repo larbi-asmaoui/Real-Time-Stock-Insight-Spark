@@ -94,7 +94,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
-      - ./data:/app/data
+      - spark_data:/app/data
       - ./checkpoints:/app/checkpoints
     # command: ["/bin/bash", "/app/src/run_pipeline.sh"]
 
@@ -123,14 +123,26 @@ services:
       - "8501:8501"
     volumes:
       - ./src:/app/src
-      - ./data:/app/data
+      - spark_data:/app/data
     environment:
       - PYTHONPATH=/app/src
     depends_on:
       - spark-streaming
-
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.10.0
+    container_name: mlflow
+    ports:
+      - "5000:5000"
+    volumes:
+      - spark_data:/app/data  # CRITICAL: Shares storage with Spark
+    environment:
+      - MLFLOW_TRACKING_URI=file:///app/data/mlruns
+    # Launch the UI reading from the shared volume
+    command: mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri file:///app/data/mlruns
+    depends_on:
+      - spark-streaming
 volumes:
-  data_volume:
+  spark_data:
     driver: local
 
 networks:

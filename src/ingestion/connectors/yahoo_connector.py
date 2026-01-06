@@ -25,19 +25,9 @@ class YahooFinanceConnector:
         self.last_seen = {}
 
     def fetch_sync(self, symbol):
-        """
-        Blocking fetch function to be run in executor.
-        """
         try:
             ticker = yf.Ticker(symbol)
             info = ticker.info
-            # info_dict = dict(info)
-            # logging.info(f"{info_dict}")
-            # logging.info(f"{info_dict.last_trade_time}")
-# 2026-01-01 14:52:36,986 INFO [INFO] Fetch TSLA: lazy-loading dict with keys = ['currency', 'dayHigh', 'dayLow', 'exchange', 'fiftyDayAverage', 'lastPrice', 'lastVolume', 'marketCap', 'open', 'previousClose', 'quoteType', 'regularMarketPreviousClose', 'shares', 'tenDayAverageVolume', 'threeMonthAverageVolume', 'timezone', 'twoHundredDayAverage', 'yearChange', 'yearHigh', 'yearLow']
-
-            # logging.info(f"[INFO] Fetch {symbol}: {info}")  
-            # yfinance info is a dict, keys are camelCase
             return {
                 "symbol": symbol,
                 "currency": info.get("currency", "USD"),

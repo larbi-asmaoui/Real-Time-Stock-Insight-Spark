@@ -12,17 +12,10 @@ from processing.delta_lake.delta_lake_gold import GoldLayer
 logger = setup_logging()
 
 class StockStreamingProcessor:
-    """
-    Orchestrator for the Streaming Pipeline.
-    Refactored for OCP (Open Closed Principle).
-    """
-
     def __init__(self, config=None):
         self.config = config or SparkConfig()
         self.spark = None
         self.schemas = StockSchemas()
-        
-        # OCP: We can easily add more layers here without changing the run logic
         self.layers: List[StreamLayer] = [] 
         self.queries: Dict[str, Any] = {}
 
@@ -37,7 +30,6 @@ class StockStreamingProcessor:
         self.spark.sparkContext.setLogLevel(self.config.LOG_LEVEL)
         logger.info(f"Spark {self.spark.version} + Delta Lake activated")
 
-        # Initialize layers with dependencies
         self.layers = [
             BronzeLayer(self.spark, self.config, self.schemas),
             SilverLayer(self.spark, self.config, self.schemas),
@@ -54,7 +46,6 @@ class StockStreamingProcessor:
         logger.info("=" * 70)
 
         try:
-            # Generic Loop for all layers (Template Pattern Usage)
             for layer in self.layers:
                 layer.bootstrap()
                 query = layer.run()
@@ -64,7 +55,6 @@ class StockStreamingProcessor:
             logger.info("ALL STREAMS STARTED")
             logger.info("=" * 70)
             
-            # Attente bloquante
             self.spark.streams.awaitAnyTermination()
             
         except KeyboardInterrupt:

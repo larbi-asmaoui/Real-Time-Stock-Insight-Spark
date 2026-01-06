@@ -2,14 +2,13 @@ from pyspark.sql import DataFrame
 from pyspark.sql.functions import col, current_timestamp, to_timestamp, when
 from processing.abstraction import StreamLayer
 from processing.spark_streaming_utils import setup_logging
+from delta.tables import DeltaTable
+from pyspark.sql.types import TimestampType, StringType, DoubleType, LongType, BooleanType, StructType, StructField
+
 
 logger = setup_logging()
 
 class SilverLayer(StreamLayer):
-    """
-    Silver Layer: Cleaning and Enriched Data.
-    """
-    
     def __init__(self, spark, config, schemas):
         super().__init__(spark, config)
         self.schemas = schemas
@@ -38,18 +37,9 @@ class SilverLayer(StreamLayer):
         )
 
     def bootstrap(self) -> bool:
-        """
-        Initialize Silver Delta table with empty DataFrame if not exists.
-        """
-        from delta.tables import DeltaTable
         if not DeltaTable.isDeltaTable(self.spark, self.output_path):
             logger.info(f"Bootstrapping Silver Table at {self.output_path}...")
             try:
-                from pyspark.sql.types import TimestampType, StringType, DoubleType, LongType, BooleanType, StructType, StructField
-                
-                # Define Silver Schema (Calculated columns)
-                # Base is Bronze (without nested struct 'record') -> flattened
-                # But here we define the final expected Silver schema
                 
                 schema = StructType([
                     StructField("symbol", StringType(), True),

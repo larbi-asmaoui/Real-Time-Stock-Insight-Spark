@@ -1,15 +1,9 @@
-"""
-Central Configuration for Spark Streaming
-BEST PRACTICE: Separate configuration from business logic
-"""
-
 class SparkConfig:
-    """Optimized Spark Configuration for Financial Streaming"""
     
     # Kafka Configuration
     KAFKA_BROKERS = "kafka:29092"
     KAFKA_TOPIC = "stock_prices"
-    KAFKA_STARTING_OFFSETS = "earliest"  # or "earliest" for history
+    KAFKA_STARTING_OFFSETS = "earliest" 
     
     # Spark Configuration
     APP_NAME = "StockInsightStreaming"
@@ -17,7 +11,7 @@ class SparkConfig:
     
     # Performance Tuning
     MAX_OFFSETS_PER_TRIGGER = 10000
-    PROCESSING_TIME = "0 seconds" # Minimize latency
+    PROCESSING_TIME = "0 seconds" 
     
     # Storage paths for medallion architecture
     BRONZE_INIT_DELAY = 45
@@ -29,7 +23,7 @@ class SparkConfig:
     
     # Windowing Configuration
     WINDOW_DURATION = "10 seconds"
-    SLIDE_DURATION = "5 seconds"  # Overlapping windows
+    SLIDE_DURATION = "5 seconds" 
     WATERMARK_DELAY = "5 seconds"
     
     # Spark SQL Optimization

@@ -1,19 +1,12 @@
-"""
-Data Schemas for Spark Streaming
-BEST PRACTICE: Explicitly define all schemas
-"""
-
 from pyspark.sql.types import (
     StructType, StructField, StringType, 
     DoubleType, LongType, TimestampType
 )
 
 class StockSchemas:
-    """Centralized schema definition"""
     
     @staticmethod
     def get_input_schema():
-        """Schema for incoming Kafka messages"""
         return StructType([
             StructField("symbol", StringType(), False),
             StructField("price", DoubleType(), False),
@@ -26,7 +19,6 @@ class StockSchemas:
     
     @staticmethod
     def get_aggregated_schema():
-        """Schema for aggregated data"""
         return StructType([
             StructField("window_start", TimestampType(), False),
             StructField("window_end", TimestampType(), False),
