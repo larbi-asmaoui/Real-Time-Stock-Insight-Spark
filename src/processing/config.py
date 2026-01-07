@@ -1,7 +1,8 @@
 class SparkConfig:
     
     # Kafka Configuration
-    KAFKA_BROKERS = "kafka:29092"
+    # KAFKA_BROKERS = "kafka:29092"
+    KAFKA_BROKERS = "redpanda:9092"
     KAFKA_TOPIC = "stock_prices"
     KAFKA_STARTING_OFFSETS = "earliest" 
     
@@ -16,10 +17,12 @@ class SparkConfig:
     # Storage paths for medallion architecture
     BRONZE_INIT_DELAY = 45
     SILVER_INIT_DELAY = 45
-    BASE_PATH = "/app/data"
+    # BASE_PATH = "/app/data"
+    BASE_PATH = "s3a://finance-lake"
     BRONZE_PATH = f"{BASE_PATH}/lake/bronze"
     SILVER_PATH = f"{BASE_PATH}/lake/silver"
     GOLD_PATH = f"{BASE_PATH}/lake/gold"
+    CHECKPOINT_ROOT = f"{BASE_PATH}/checkpoints"
     
     # Windowing Configuration
     WINDOW_DURATION = "10 seconds"
@@ -37,7 +40,7 @@ class SparkConfig:
     @staticmethod
     def get_spark_configs():
         """Returns a dict of Spark configurations"""
-        return {
+        configs =  {
            
             "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0",
             
@@ -46,7 +49,7 @@ class SparkConfig:
             "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog",
             "spark.databricks.delta.schema.autoMerge.enabled": str(SparkConfig.DELTA_MERGE_SCHEMA).lower(),
             
-            "spark.sql.streaming.checkpointLocation.root": "/app/data/checkpoints",
+            # "spark.sql.streaming.checkpointLocation.root": "s3a://finance-lake/checkpoints",
             "spark.sql.streaming.minBatchesToRetain": "10",
             
             "spark.sql.streaming.schemaInference": "false",
@@ -59,5 +62,21 @@ class SparkConfig:
             "spark.sql.streaming.kafka.consumer.poll.ms": "512",
             "spark.sql.shuffle.partitions": str(SparkConfig.SHUFFLE_PARTITIONS),
             "spark.default.parallelism": "200",
-            "spark.sql.streaming.statefulOperator.checkCorrectness.enabled": "false"
+            "spark.sql.streaming.statefulOperator.checkCorrectness.enabled": "false",
+
+            # --- MINIO / S3 CONFIGURATION --
+            "spark.hadoop.fs.s3a.endpoint": "http://minio:9000",
+            "spark.hadoop.fs.s3a.access.key": "minioadmin",
+            "spark.hadoop.fs.s3a.secret.key": "minioadmin",
+            "spark.hadoop.fs.s3a.path.style.access": "true", # Critical for MinIO
+            "spark.hadoop.fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem",
+            "spark.hadoop.fs.s3a.connection.ssl.enabled": "false",
+            
+            # Committers for S3 performance
+            "spark.hadoop.fs.s3a.committer.name": "directory", 
+            "spark.sql.sources.commitProtocolClass": "org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol"
         }
+
+        configs["spark.sql.streaming.checkpointLocation.root"] = SparkConfig.CHECKPOINT_ROOT
+
+        return configs

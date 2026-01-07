@@ -1,47 +1,62 @@
 services:
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.0
-    hostname: zookeeper
-    container_name: zookeeper
-    ports:
-      - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_SERVER_ID: 1
-      ZOOKEEPER_SERVERS: zookeeper:2888:3888
-
-  kafka:
-    image: confluentinc/cp-kafka:7.3.0
-    hostname: kafka
-    container_name: kafka
-    depends_on:
-      - zookeeper
+  # --- INFRASTRUCTURE ---
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:v23.2.14
+    container_name: redpanda
     ports:
       - "9092:9092"
-      - "29092:29092"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:29092,PLAINTEXT_HOST://0.0.0.0:9092
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      - "19092:19092"
+    command:
+      - redpanda start
+      - --smp 1 
+      - --overprovisioned
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+      - --pandaproxy-addr internal://0.0.0.0:8082,external://0.0.0.0:18082
+      - --advertise-pandaproxy-addr internal://redpanda:8082,external://localhost:18082
+      - --schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081
+      - --rpc-addr redpanda:33145
+      # - --on-access-auth=false
+    volumes:
+      - redpanda_data:/var/lib/redpanda/data
     healthcheck:
-      test:
-        [
-          "CMD",
-          "kafka-broker-api-versions",
-          "--bootstrap-server",
-          "localhost:9092",
-        ]
+      test: ["CMD-SHELL", "rpk cluster health | grep -E 'Healthy|Unhealthy'"]
       interval: 10s
-      timeout: 10s
+      timeout: 5s
       retries: 5
 
+  minio:
+    image: minio/minio
+    container_name: minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  createbuckets:
+    image: minio/mc
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      /usr/bin/mc alias set myminio http://minio:9000 minioadmin minioadmin;
+      /usr/bin/mc mb myminio/finance-lake;
+      /usr/bin/mc mb myminio/mlflow;
+      exit 0;
+      "
+
+  # --- COMPUTE ---
   spark-master:
     build:
       context: .
@@ -49,15 +64,14 @@ services:
     ports:
       - "8080:8080"
       - "7077:7077"
+    environment:
+      - SPARK_MODE=master
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+      - AWS_REGION=us-east-1
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
-    environment:
-      - SPARK_MODE=master
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
 
   spark-worker:
     build:
@@ -70,10 +84,9 @@ services:
       - SPARK_MASTER_URL=spark://spark-master:7077
       - SPARK_WORKER_MEMORY=2G
       - SPARK_WORKER_CORES=2
-      - SPARK_RPC_AUTHENTICATION_ENABLED=no
-      - SPARK_RPC_ENCRYPTION_ENABLED=no
-      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
-      - SPARK_SSL_ENABLED=no
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+      - AWS_REGION=us-east-1
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
@@ -84,19 +97,29 @@ services:
       dockerfile: Dockerfile.spark
     container_name: spark-streaming
     depends_on:
-      - kafka
+      redpanda:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      spark-master:
+        condition: service_started
     ports:
-      - "4040:4040" # Spark UI
+      - "4040:4040"
     environment:
       - PYTHONPATH=/app/src
       - SPARK_MODE=standalone
       - SPARK_DRIVER_MEMORY=1G
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+      - AWS_REGION=us-east-1
+      - KAFKA_BROKER=redpanda:9092
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
-      - spark_data:/app/data
-      - ./checkpoints:/app/checkpoints
-    # command: ["/bin/bash", "/app/src/run_pipeline.sh"]
+      # NOTE: No ./data volume here! Data goes to MinIO S3.
+      # Only mount if you need to persist local MLflow runs to a specific local folder 
+      # (but best practice is to point MLflow to S3 too).
+      - ./data/mlruns:/app/mlruns 
 
   scraper:
     build:
@@ -104,12 +127,11 @@ services:
       dockerfile: Dockerfile.scraper
     container_name: scraper
     depends_on:
-      - kafka
+      redpanda:
+        condition: service_healthy
     environment:
-      # - KAFKA_BROKER=localhost:9092
-      - KAFKA_BROKER=kafka:29092
+      - KAFKA_BROKER=redpanda:9092
       - PYTHONPATH=/app/src
-    restart: always
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
@@ -121,28 +143,30 @@ services:
     container_name: dashboard
     ports:
       - "8501:8501"
-    volumes:
-      - ./src:/app/src
-      - spark_data:/app/data
     environment:
       - PYTHONPATH=/app/src
+      - AWS_ACCESS_KEY_ID=minioadmin
+      - AWS_SECRET_ACCESS_KEY=minioadmin
+      - S3_ENDPOINT=http://minio:9000
     depends_on:
-      - spark-streaming
+      - minio:
+        condition: service_healthy
+    volumes:
+      - ./src:/app/src
+
   mlflow:
     image: ghcr.io/mlflow/mlflow:v2.10.0
     container_name: mlflow
     ports:
       - "5000:5000"
     volumes:
-      - spark_data:/app/data  # CRITICAL: Shares storage with Spark
-    environment:
-      - MLFLOW_TRACKING_URI=file:///app/data/mlruns
-    # Launch the UI reading from the shared volume
-    command: mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri file:///app/data/mlruns
-    depends_on:
-      - spark-streaming
+      - ./data/mlruns:/app/mlruns
+    command: mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri file:///app/mlruns
+
 volumes:
-  spark_data:
+  minio_data:
+    driver: local
+  redpanda_data:
     driver: local
 
 networks:

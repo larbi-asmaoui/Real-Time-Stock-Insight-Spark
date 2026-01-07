@@ -1,9 +1,9 @@
 kafka-python
-pyspark
+# pyspark
 findspark
 dotenv
 delta-spark==2.4.0
-torch
+# torch
 mlflow
 numpy
 pandas
