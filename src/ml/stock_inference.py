@@ -1,6 +1,7 @@
 import mlflow.pytorch
 import torch
 import json
+import logging
 import pandas as pd 
 import numpy as np 
 import pyspark.sql.functions as F
@@ -8,6 +9,13 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, array, collect_list
 from pyspark.sql.window import Window
 from feature_engineering import transform_data
+
+logging.basicConfig(
+    filename='logs/stock_inference.log',
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s %(message)s',
+    filemode='w'
+)
 
 def get_spark_session():
     return SparkSession.builder \
@@ -30,11 +38,11 @@ def run_inference():
         # Get latest successful run
         runs = mlflow.search_runs(experiment_names=["Stock_Prediction_LSTM"], order_by=["start_time DESC"], max_results=1)
         if runs.empty:
-            print("❌ No training runs found.")
+            logging.error("No training runs found.")
             return
             
         run_id = runs.iloc[0].run_id
-        print(f"📥 Loading Model from Run ID: {run_id}")
+        logging.info(f"Loading Model from Run ID: {run_id}")
         
         model_uri = f"runs:/{run_id}/model"
         model = mlflow.pytorch.load_model(model_uri)
@@ -45,17 +53,17 @@ def run_inference():
             stats = json.load(f)
             
     except Exception as e:
-        print(f"❌ Error loading model: {e}")
+        logging.error(f"Error loading model: {e}")
         return
 
     # 2. READ LIVE DATA (Gold Layer)
-    print("Reading Gold data...")
+    logging.info("Reading Gold data...")
     try:
         # Optimization: Only read enough data for the sequence
         # In a real batch job, you'd filter by time. For now, read all.
         df = spark.read.format("delta").load("s3a://finance-lake/lake/gold")
     except:
-        print("Gold table not found.")
+        logging.error("Gold table not found.")
         return
 
     # 3. FEATURE ENGINEERING (Apply same logic)
@@ -90,7 +98,7 @@ def run_inference():
     rows = df_inference.select("symbol", "window_start", "sequence").collect()
     results = []
     
-    print(f"🔮 Generating predictions for {len(rows)} symbols...")
+    logging.info(f"Generating predictions for {len(rows)} symbols...")
     for row in rows:
         # Prepare Tensor (1, Seq_Len, Features)
         seq_array = np.array(row.sequence)
@@ -102,13 +110,13 @@ def run_inference():
         # Decision: > 0.5 = BUY, < 0.5 = SELL
         signal = "BUY" if prob > 0.5 else "SELL"
         results.append((row.symbol, row.window_start, float(prob), signal))
-        print(f"   {row.symbol}: {prob:.4f} ({signal})")
+        logging.info(f"   {row.symbol}: {prob:.4f} ({signal})")
 
     # 6. WRITE PREDICTIONS TO LAKE
     if results:
         res_df = spark.createDataFrame(results, ["symbol", "window_end", "probability", "signal"])
         res_df.write.format("delta").mode("append").option("mergeSchema", "true").save("s3a://finance-lake/lake/predictions")
-        print("✅ Predictions saved to s3a://finance-lake/lake/predictions")
+        logging.info("Predictions saved to s3a://finance-lake/lake/predictions")
 
 if __name__ == "__main__":
     run_inference()
