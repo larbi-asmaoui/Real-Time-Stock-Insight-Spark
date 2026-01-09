@@ -1,17 +1,17 @@
 services:
-  # --- INFRASTRUCTURE ---
+  # --- INFRASTRUCTURE (Redpanda + MinIO) ---
   redpanda:
     image: docker.redpanda.com/redpandadata/redpanda:v23.2.14
     container_name: redpanda
     ports:
-      - "9092:9092"
-      - "19092:19092"
+      - "9094:9094"
+      - "19094:19094"
     command:
       - redpanda start
-      - --smp 1 
+      - --smp 1
       - --overprovisioned
-      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
-      - --advertise-kafka-addr internal://redpanda:9092,external://localhost:19092
+      - --kafka-addr internal://0.0.0.0:9094,external://0.0.0.0:19094
+      - --advertise-kafka-addr internal://redpanda:9094,external://localhost:19094
       - --pandaproxy-addr internal://0.0.0.0:8082,external://0.0.0.0:18082
       - --advertise-pandaproxy-addr internal://redpanda:8082,external://localhost:18082
       - --schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081
@@ -51,46 +51,12 @@ services:
     entrypoint: >
       /bin/sh -c "
       /usr/bin/mc alias set myminio http://minio:9000 minioadmin minioadmin;
-      /usr/bin/mc mb myminio/finance-lake;
-      /usr/bin/mc mb myminio/mlflow;
+      /usr/bin/mc mb --ignore-existing myminio/finance-lake;
+      /usr/bin/mc mb --ignore-existing myminio/mlflow;
       exit 0;
       "
 
-  # --- COMPUTE ---
-  spark-master:
-    build:
-      context: .
-      dockerfile: Dockerfile.spark
-    ports:
-      - "8080:8080"
-      - "7077:7077"
-    environment:
-      - SPARK_MODE=master
-      - AWS_ACCESS_KEY_ID=minioadmin
-      - AWS_SECRET_ACCESS_KEY=minioadmin
-      - AWS_REGION=us-east-1
-    volumes:
-      - ./src:/app/src
-      - ./logs:/app/logs
-
-  spark-worker:
-    build:
-      context: .
-      dockerfile: Dockerfile.spark
-    depends_on:
-      - spark-master
-    environment:
-      - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
-      - SPARK_WORKER_MEMORY=2G
-      - SPARK_WORKER_CORES=2
-      - AWS_ACCESS_KEY_ID=minioadmin
-      - AWS_SECRET_ACCESS_KEY=minioadmin
-      - AWS_REGION=us-east-1
-    volumes:
-      - ./src:/app/src
-      - ./logs:/app/logs
-
+  # --- SPARK (SINGLE NODE MODE) ---
   spark-streaming:
     build:
       context: .
@@ -101,26 +67,26 @@ services:
         condition: service_healthy
       minio:
         condition: service_healthy
-      spark-master:
-        condition: service_started
-    ports:
-      - "4040:4040"
     environment:
-      - PYTHONPATH=/app/src
-      - SPARK_MODE=standalone
-      - SPARK_DRIVER_MEMORY=1G
+      - SPARK_MODE=local
       - AWS_ACCESS_KEY_ID=minioadmin
       - AWS_SECRET_ACCESS_KEY=minioadmin
       - AWS_REGION=us-east-1
-      - KAFKA_BROKER=redpanda:9092
+      - KAFKA_BROKER=redpanda:9094
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
-      # NOTE: No ./data volume here! Data goes to MinIO S3.
-      # Only mount if you need to persist local MLflow runs to a specific local folder 
-      # (but best practice is to point MLflow to S3 too).
-      - ./data/mlruns:/app/mlruns 
+      # Mount for local MLflow persistence if needed
+      - ./data/mlruns:/app/mlruns
+    # THE MAGIC COMMAND: master "local[*]" means use all cores on THIS container. No workers.
+    command: >
+      spark-submit 
+      --master "local[*]" 
+      --driver-memory 4g 
+      --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file:/opt/bitnami/spark/conf/log4j.properties
+      /app/src/processing/spark_streaming_main.py
 
+  # --- APPS ---
   scraper:
     build:
       context: .
@@ -130,7 +96,7 @@ services:
       redpanda:
         condition: service_healthy
     environment:
-      - KAFKA_BROKER=redpanda:9092
+      - KAFKA_BROKER=redpanda:9094
       - PYTHONPATH=/app/src
     volumes:
       - ./src:/app/src
@@ -149,7 +115,7 @@ services:
       - AWS_SECRET_ACCESS_KEY=minioadmin
       - S3_ENDPOINT=http://minio:9000
     depends_on:
-      - minio:
+      minio:
         condition: service_healthy
     volumes:
       - ./src:/app/src
@@ -167,6 +133,8 @@ volumes:
   minio_data:
     driver: local
   redpanda_data:
+    driver: local
+  spark_data:
     driver: local
 
 networks:
