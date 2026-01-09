@@ -76,11 +76,12 @@ services:
       - ./src:/app/src
       - ./logs:/app/logs
       - ./data/mlruns:/app/mlruns
-    # COMMAND: Use Local Mode (No Master/Worker)
     command: >
-      /opt/spark/bin/spark-submit 
+      spark-submit 
       --master "local[*]" 
-      --driver-memory 4g 
+      --driver-memory 2g 
+      --conf spark.driver.maxResultSize=1g
+      --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file:/opt/bitnami/spark/conf/log4j.properties
       /app/src/processing/spark_streaming_main.py
 
   # --- APPS ---
