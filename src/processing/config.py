@@ -2,7 +2,7 @@ class SparkConfig:
     
     # Kafka Configuration
     # KAFKA_BROKERS = "kafka:29092"
-    KAFKA_BROKERS = "redpanda:9092"
+    KAFKA_BROKERS = "redpanda:9094"
     KAFKA_TOPIC = "stock_prices"
     KAFKA_STARTING_OFFSETS = "earliest" 
     
