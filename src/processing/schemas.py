@@ -1,19 +1,12 @@
-"""
-Schémas de données pour Spark Streaming
-BEST PRACTICE: Définir explicitement tous les schémas
-"""
-
 from pyspark.sql.types import (
     StructType, StructField, StringType, 
     DoubleType, LongType, TimestampType
 )
 
 class StockSchemas:
-    """Définition centralisée des schémas"""
     
     @staticmethod
     def get_input_schema():
-        """Schéma des messages Kafka entrants"""
         return StructType([
             StructField("symbol", StringType(), False),
             StructField("price", DoubleType(), False),
@@ -21,12 +14,11 @@ class StockSchemas:
             StructField("high", DoubleType(), False),
             StructField("low", DoubleType(), False),
             StructField("volume", LongType(), False),
-            StructField("timestamp", StringType(), False),
+            StructField("timestamp", TimestampType(), False),
         ])
     
     @staticmethod
     def get_aggregated_schema():
-        """Schéma des données agrégées"""
         return StructType([
             StructField("window_start", TimestampType(), False),
             StructField("window_end", TimestampType(), False),

@@ -1,37 +1,95 @@
-from pyspark.sql.functions import (
-    col, current_timestamp, to_timestamp, when
-)
+from pyspark.sql import DataFrame
+from pyspark.sql.functions import col, current_timestamp, to_timestamp, when
+from processing.abstraction import StreamLayer
 from processing.spark_streaming_utils import setup_logging
+from delta.tables import DeltaTable
+from pyspark.sql.types import TimestampType, StringType, DoubleType, LongType, BooleanType, StructType, StructField
+
 
 logger = setup_logging()
 
-class SilverLayer:
+class SilverLayer(StreamLayer):
     def __init__(self, spark, config, schemas):
-        self.spark = spark
-        self.config = config
+        super().__init__(spark, config)
         self.schemas = schemas
+
+    @property
+    def layer_name(self) -> str:
+        return "silver"
+
+    @property
+    def output_path(self) -> str:
+        return self.config.SILVER_PATH
     
-    def create_stream(self):
-        logger.info("🥈 SILVER - Enrichissement données...")
-        
-        # Delta infère automatiquement depuis les métadonnées
-        bronze_df = (
+    @property
+    def checkpoint_path(self) -> str:
+        return f"{self.config.BASE_PATH}/checkpoints/silver"
+
+    def read(self) -> DataFrame:
+        logger.info("SILVER - Reading from Bronze...")
+        return (
             self.spark.readStream
             .format("delta")
             .option("startingVersion", "0")
-            .option("ignoreChanges", "true")  # Pour les updates
-            .option("ignoreDeletes", "true")  # Pour les deletes
+            .option("ignoreChanges", "true")
+            .option("ignoreDeletes", "true")
             .load(self.config.BRONZE_PATH)
         )
-        
-        logger.info(f"✅ Lecture Bronze → {self.config.BRONZE_PATH}")
-        
-        # Transformations Silver
-        silver_df = (
-            bronze_df
+
+    def bootstrap(self) -> bool:
+        if not DeltaTable.isDeltaTable(self.spark, self.output_path):
+            logger.info(f"Bootstrapping Silver Table at {self.output_path}...")
+            try:
+                
+                schema = StructType([
+                    StructField("symbol", StringType(), True),
+                    StructField("price", DoubleType(), True),
+                    StructField("open", DoubleType(), True),
+                    StructField("high", DoubleType(), True),
+                    StructField("low", DoubleType(), True),
+                    StructField("volume", LongType(), True),
+                    # timestamp converted to TimestampType
+                    StructField("timestamp", TimestampType(), True),
+                    StructField("source", StringType(), True), # from Bronze record.*
+                    
+                    # Bronze metadata
+                    StructField("kafka_timestamp", StringType(), True), # kept as string in bronze? no
+                    StructField("ingestion_timestamp", TimestampType(), True),
+                    StructField("bronze_inserted_at", TimestampType(), True),
+
+                    # Silver Calculations
+                    StructField("spread", DoubleType(), True),
+                    StructField("price_change", DoubleType(), True),
+                    StructField("price_change_pct", DoubleType(), True),
+                    StructField("is_anomaly", BooleanType(), True),
+                    StructField("silver_processed_at", TimestampType(), True)
+                ])
+                
+                # Create empty DF
+                empty_df = self.spark.createDataFrame([], schema)
+                
+                # Write to Delta
+                (
+                    empty_df.write
+                    .format("delta")
+                    .mode("ignore")
+                    .partitionBy("symbol")
+                    .option("mergeSchema", "true")
+                    .save(self.output_path)
+                )
+                logger.info("Silver Table bootstrapped successfully.")
+                return True
+            except Exception as e:
+                logger.error(f"Failed to bootstrap Silver: {e}")
+                return False
+        return True
+
+    def transform(self, df: DataFrame) -> DataFrame:
+        return (
+            df
             .withColumn("timestamp", to_timestamp(col("timestamp")))
             
-            # Métriques calculées
+            # Derived metrics
             .withColumn("spread", col("high") - col("low"))
             .withColumn("price_change", col("price") - col("open"))
             .withColumn(
@@ -40,7 +98,7 @@ class SilverLayer:
                 .otherwise(0.0)
             )
             
-            # Détection anomalies
+            # Anomaly detection
             .withColumn(
                 "is_anomaly",
                 when(
@@ -53,42 +111,6 @@ class SilverLayer:
             )
             
             .withColumn("silver_processed_at", current_timestamp())
+            .withWatermark("timestamp", "10 minutes")
             .dropDuplicates(["symbol", "timestamp"])
         )
-        
-        # Écriture Silver
-        def write_silver(batch_df, batch_id):
-            if batch_df.isEmpty():
-                logger.info(f"📦 Silver batch {batch_id}: vide")
-                return
-                
-            count = batch_df.count()
-            anomalies = batch_df.filter(col("is_anomaly") == True).count()
-            
-            logger.info(f"📦 Silver batch {batch_id}: {count} records ({anomalies} anomalies)")
-            
-            try:
-                (
-                    batch_df.write
-                    .format("delta")
-                    .mode("append")
-                    .partitionBy("symbol")
-                    .option("mergeSchema", "true")
-                    .save(self.config.SILVER_PATH)
-                )
-                logger.info(f"✅ Silver batch {batch_id} écrit avec succès")
-            except Exception as e:
-                logger.error(f"❌ Erreur Silver batch {batch_id}: {e}")
-                raise
-        
-        query = (
-            silver_df.writeStream
-            .foreachBatch(write_silver)
-            .trigger(processingTime=self.config.PROCESSING_TIME)
-            .option("checkpointLocation", f"{self.config.BASE_PATH}/checkpoints/silver")
-            .queryName("silver_enrichment")
-            .start()
-        )
-        
-        logger.info(f"✅ Silver actif → {self.config.SILVER_PATH}")
-        return query

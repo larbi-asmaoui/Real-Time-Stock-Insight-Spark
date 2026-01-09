@@ -7,19 +7,17 @@ import os
 
 load_dotenv()
 
-# Configure logging
 logging.basicConfig(
     filename='logs/kafka_producer.log',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s %(message)s',
     filemode='w'
-    
 )
 
 class FinanceLakeKafkaProducer:
    
     def __init__(self):
-        self.broker = os.getenv("KAFKA_BROKER", "kafka:29092")
+        self.broker = os.getenv("KAFKA_BROKER", "redpanda:19094")
         self.topic = os.getenv("TOPIC_NAME", "stock_prices")
 
         try:

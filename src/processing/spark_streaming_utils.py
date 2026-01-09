@@ -12,7 +12,6 @@ def setup_logging():
     return logging.getLogger(__name__)
 
 def get_sql_queries(view_name="stock_analytics"):
-    """Retourne les requêtes Spark SQL prêtes à exécuter"""
     return {
         "stats": f"""
         SELECT symbol,
