@@ -1,143 +1,114 @@
-import argparse
-import os
-import json
-import pandas as pd
-import numpy as np
 import mlflow.pytorch
 import torch
+import json
+import pandas as pd 
+import numpy as np 
 import pyspark.sql.functions as F
 from pyspark.sql import SparkSession
-from pyspark.sql.types import StructType, StructField, StringType, FloatType, TimestampType
+from pyspark.sql.functions import col, array, collect_list
 from pyspark.sql.window import Window
-
 from feature_engineering import transform_data
 
-# --- Global Cache for Model/Stats on Executors ---
-class ModelCache:
-    model = None
-    stats = None
-
-def load_resources(model_path, stats_path):
-    if ModelCache.model is None:
-        # Load Model
-        # If path is local to driver but not executors, this fails. 
-        # In a real cluster, use SparkFiles or shared storage (DFS/NFS).
-        # We assume shared storage "/app/data" per PROMPT context.
-        device = torch.device("cpu") # Inference on CPU usually for spark workers unless GPU configured
-        ModelCache.model = mlflow.pytorch.load_model(f"file://{model_path}", map_location=device)
-        ModelCache.model.eval()
-        
-    if ModelCache.stats is None:
-        with open(stats_path, 'r') as f:
-            ModelCache.stats = json.load(f)
-
-def inference_function(key, pdf: pd.DataFrame, model_path, stats_path, seq_len):
-    """
-    Pandas UDF function to run for each symbol.
-    """
-    load_resources(model_path, stats_path)
-    
-    # 1. Sort by time (crucial for LSTM)
-    pdf = pdf.sort_values("window_start")
-    
-    # 2. Preprocessing
-    # Features are: log_returns, volatility, log_volume
-    cols = ["log_returns", "volatility", "log_volume"]
-    
-    # Scale
-    for c in cols:
-        m = ModelCache.stats[c]["mean"]
-        s = ModelCache.stats[c]["std"]
-        if s == 0: s = 1.0
-        pdf[c] = (pdf[c] - m) / s
-        
-    # 3. Create Sequence
-    # We need the LAST valid sequence
-    # Drop NaNs (from lags)
-    pdf = pdf.dropna(subset=cols)
-    
-    if len(pdf) < seq_len:
-        # Not enough data to predict
-        return pd.DataFrame()
-        
-    # Take last SEQ_LEN rows
-    seq = pdf.tail(seq_len)[cols].values
-    
-    # 4. Predict
-    X = torch.tensor(seq, dtype=torch.float32).unsqueeze(0) # (1, seq_len, 3)
-    
-    with torch.no_grad():
-        prob = ModelCache.model(X).item()
-        
-    # 5. Return Result
-    return pd.DataFrame({
-        "symbol": [key[0]], # key is tuple
-        "app_prediction": [prob],
-        "prediction_timestamp": [pd.Timestamp.now()]
-    })
-
-
-def run_inference(spark, config):
-    # 1. Configuration
-    gold_path = config["GOLD_PATH"]
-    predictions_path = "/app/data/lake/predictions"
-    
-    # 2. Read Gold Data
-    df = spark.read.format("delta").load(gold_path)
-    
-    # 3. Filter Latest Window
-    # Strategy: Rank by time desc, take top (SEQ_LEN + Buffer)
-    w = Window.partitionBy("symbol").orderBy(F.col("window_start").desc())
-    rows_needed = config["SEQ_LEN"] + 20 # buffer for lags
-    
-    df_filtered = df.withColumn("rank", F.row_number().over(w)) \
-                    .filter(F.col("rank") <= rows_needed) \
-                    .drop("rank")
-                    
-    # 4. Apply Feature Engineering
-    df_features = transform_data(df_filtered)
-    
-    # 5. Execute Inference
-    # We pass the paths via closure or config. 
-    # applyInPandas takes a function. We can use functools.partial or a wrapper.
-    
-    result_schema = StructType([
-        StructField("symbol", StringType(), True),
-        StructField("app_prediction", FloatType(), True),
-        StructField("prediction_timestamp", TimestampType(), True)
-    ])
-    
-    # Wrapper to unpack arguments
-    def inference_wrapper(key, pdf):
-        return inference_function(key, pdf, 
-                                  config["MODEL_PATH"], 
-                                  config["STATS_PATH"], 
-                                  config["SEQ_LEN"])
-
-    predictions = df_features.groupBy("symbol").applyInPandas(inference_wrapper, schema=result_schema)
-    
-    # 6. Write to Delta
-    predictions.write.format("delta").mode("append").save(predictions_path)
-    print(f"Predictions written to {predictions_path}")
-
-
-if __name__ == "__main__":
-    spark = SparkSession.builder \
+def get_spark_session():
+    return SparkSession.builder \
         .appName("StockInference") \
-        .config("spark.jars.packages", "io.delta:delta-core_2.12:2.4.0") \
         .config("spark.sql.extensions", "io.delta.sql.DeltaSparkSessionExtension") \
         .config("spark.sql.catalog.spark_catalog", "org.apache.spark.sql.delta.catalog.DeltaCatalog") \
+        .config("spark.hadoop.fs.s3a.endpoint", "http://minio:9000") \
+        .config("spark.hadoop.fs.s3a.access.key", "minioadmin") \
+        .config("spark.hadoop.fs.s3a.secret.key", "minioadmin") \
+        .config("spark.hadoop.fs.s3a.path.style.access", "true") \
+        .config("spark.hadoop.fs.s3a.impl", "org.apache.hadoop.fs.s3a.S3AFileSystem") \
         .getOrCreate()
+
+def run_inference():
+    spark = get_spark_session()
+    
+    # 1. LOAD MODEL & METRICS FROM MLFLOW
+    mlflow.set_tracking_uri("file:///app/mlruns")
+    try:
+        # Get latest successful run
+        runs = mlflow.search_runs(experiment_names=["Stock_Prediction_LSTM"], order_by=["start_time DESC"], max_results=1)
+        if runs.empty:
+            print("❌ No training runs found.")
+            return
+            
+        run_id = runs.iloc[0].run_id
+        print(f"📥 Loading Model from Run ID: {run_id}")
         
-    # Typically these come from CLI args or persistent config
-    config = {
-        "GOLD_PATH": "/app/data/lake/gold",
-        "SEQ_LEN": 10,
-        "MODEL_PATH": "/app/data/mlruns/0/latest/artifacts/model", # Adjust as needed
-        "STATS_PATH": "/app/data/mlruns/0/latest/artifacts/metrics.json" # Adjust as needed
-    }
+        model_uri = f"runs:/{run_id}/model"
+        model = mlflow.pytorch.load_model(model_uri)
+        
+        # Load the metrics.json artifact to get scaling params
+        local_path = mlflow.artifacts.download_artifacts(run_id=run_id, artifact_path="metrics.json")
+        with open(local_path) as f:
+            stats = json.load(f)
+            
+    except Exception as e:
+        print(f"❌ Error loading model: {e}")
+        return
+
+    # 2. READ LIVE DATA (Gold Layer)
+    print("Reading Gold data...")
+    try:
+        # Optimization: Only read enough data for the sequence
+        # In a real batch job, you'd filter by time. For now, read all.
+        df = spark.read.format("delta").load("s3a://finance-lake/lake/gold")
+    except:
+        print("Gold table not found.")
+        return
+
+    # 3. FEATURE ENGINEERING (Apply same logic)
+    df = transform_data(df)
     
-    # Ensure paths are valid (In a real scenario, we might resolve 'latest' dynamically)
-    # For now, we assume the user/airflow sets these correctly.
+    # Apply Scaling
+    feature_cols = ["log_returns", "volatility", "log_volume"]
+    for c in feature_cols:
+        m = stats[c]["mean"]
+        s = stats[c]["std"]
+        df = df.withColumn(c, (col(c) - m) / s)
+
+    # 4. PREPARE LATEST SEQUENCES
+    SEQ_LEN = 5
+    w = Window.partitionBy("symbol").orderBy("window_start")
     
-    run_inference(spark, config)
+    # Collect history for every row
+    df_seq = df \
+        .withColumn("feature_vec", array(feature_cols)) \
+        .withColumn("sequence", collect_list("feature_vec").over(w.rowsBetween(-SEQ_LEN + 1, 0))) \
+        .withColumn("seq_len", F.size(col("sequence"))) \
+        .filter(col("seq_len") == SEQ_LEN)
+
+    # Get ONLY the latest window for each symbol to predict "What happens next?"
+    latest_windows = df_seq.groupBy("symbol").agg(F.max("window_start").alias("window_start"))
+    df_inference = df_seq.join(latest_windows, on=["symbol", "window_start"])
+
+    # 5. PREDICT (Driver-side Loop for Simplicity)
+    # Since we only have ~10 symbols, we collect to driver and infer.
+    # For 1M symbols, use a Pandas UDF.
+    
+    rows = df_inference.select("symbol", "window_start", "sequence").collect()
+    results = []
+    
+    print(f"🔮 Generating predictions for {len(rows)} symbols...")
+    for row in rows:
+        # Prepare Tensor (1, Seq_Len, Features)
+        seq_array = np.array(row.sequence)
+        tensor_in = torch.tensor(seq_array, dtype=torch.float32).unsqueeze(0)
+        
+        with torch.no_grad():
+            prob = model(tensor_in).item()
+            
+        # Decision: > 0.5 = BUY, < 0.5 = SELL
+        signal = "BUY" if prob > 0.5 else "SELL"
+        results.append((row.symbol, row.window_start, float(prob), signal))
+        print(f"   {row.symbol}: {prob:.4f} ({signal})")
+
+    # 6. WRITE PREDICTIONS TO LAKE
+    if results:
+        res_df = spark.createDataFrame(results, ["symbol", "window_end", "probability", "signal"])
+        res_df.write.format("delta").mode("append").option("mergeSchema", "true").save("s3a://finance-lake/lake/predictions")
+        print("✅ Predictions saved to s3a://finance-lake/lake/predictions")
+
+if __name__ == "__main__":
+    run_inference()
