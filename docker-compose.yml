@@ -76,13 +76,14 @@ services:
       - ./src:/app/src
       - ./logs:/app/logs
       - ./data/mlruns:/app/mlruns
-    command: >
-      spark-submit 
-      --master "local[*]" 
-      --driver-memory 2g 
-      --conf spark.driver.maxResultSize=1g
-      --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file:/opt/bitnami/spark/conf/log4j.properties
-      /app/src/processing/spark_streaming_main.py
+    command: tail -f /dev/null
+    # command: >
+    #   spark-submit 
+    #   --master "local[*]" 
+    #   --driver-memory 2g 
+    #   --conf spark.driver.maxResultSize=1g
+    #   --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file:/opt/bitnami/spark/conf/log4j.properties
+    #   /app/src/processing/spark_streaming_main.py
 
   # --- APPS ---
   scraper:
@@ -124,6 +125,7 @@ services:
     ports:
       - "5000:5000"
     volumes:
+      
       - ./data/mlruns:/app/mlruns
     command: mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri file:///app/mlruns
 
