@@ -39,8 +39,8 @@ RUN mkdir -p /app/logs /app/data /app/checkpoints /app/mlruns
 ENV PYTHONPATH=/app:/app/src:$PYTHONPATH
 
 # Command
-CMD ["spark-submit", \
-    "--driver-memory", "2g", \
-    "--executor-memory", "2g", \
-    "--conf", "spark.driver.extraJavaOptions=-Dlog4j.configuration=file:/opt/spark/conf/log4j.properties", \
-    "/app/src/processing/spark_streaming_main.py"]
+# CMD ["spark-submit", \
+#     "--driver-memory", "2g", \
+#     "--executor-memory", "2g", \
+#     "--conf", "spark.driver.extraJavaOptions=-Dlog4j.configuration=file:/opt/spark/conf/log4j.properties", \
+#     "/app/src/processing/spark_streaming_main.py"]
