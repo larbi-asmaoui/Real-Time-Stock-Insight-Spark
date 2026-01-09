@@ -40,43 +40,47 @@ class SparkConfig:
     @staticmethod
     def get_spark_configs():
         """Returns a dict of Spark configurations"""
-        configs =  {
-           
+        configs = {
             "spark.jars.packages": "org.apache.spark:spark-sql-kafka-0-10_2.12:3.4.0,io.delta:delta-core_2.12:2.4.0",
             
-            # --- DELTA LAKE CONFIGURATION ---
+            # --- DELTA ---
             "spark.sql.extensions": "io.delta.sql.DeltaSparkSessionExtension",
             "spark.sql.catalog.spark_catalog": "org.apache.spark.sql.delta.catalog.DeltaCatalog",
             "spark.databricks.delta.schema.autoMerge.enabled": str(SparkConfig.DELTA_MERGE_SCHEMA).lower(),
             
-            # "spark.sql.streaming.checkpointLocation.root": "s3a://finance-lake/checkpoints",
+            # --- STREAMING ---
             "spark.sql.streaming.minBatchesToRetain": "10",
-            
             "spark.sql.streaming.schemaInference": "false",
             "spark.sql.adaptive.enabled": "true",
-            
-            "spark.sql.streaming.schemaInference": "false",
-            "spark.sql.adaptive.enabled": "true",
-            "spark.sql.adaptive.coalescePartitions.enabled": "true",
             "spark.streaming.stopGracefullyOnShutdown": "true",
             "spark.sql.streaming.kafka.consumer.poll.ms": "512",
-            "spark.sql.shuffle.partitions": str(SparkConfig.SHUFFLE_PARTITIONS),
-            "spark.default.parallelism": "200",
+            
+            # --- LOCAL MODE TUNING (Critical) ---
+            "spark.master": "local[*]", 
+            "spark.driver.memory": "4g",
+            "spark.sql.shuffle.partitions": "2", # Reduced from 4
+            "spark.default.parallelism": "2",
+            "spark.memory.fraction": "0.6",
+            "spark.memory.storageFraction": "0.1",
             "spark.sql.streaming.statefulOperator.checkCorrectness.enabled": "false",
 
-            # --- MINIO / S3 CONFIGURATION --
+            # --- S3 / MINIO CONFIG ---
             "spark.hadoop.fs.s3a.endpoint": "http://minio:9000",
             "spark.hadoop.fs.s3a.access.key": "minioadmin",
             "spark.hadoop.fs.s3a.secret.key": "minioadmin",
-            "spark.hadoop.fs.s3a.path.style.access": "true", # Critical for MinIO
+            "spark.hadoop.fs.s3a.path.style.access": "true",
             "spark.hadoop.fs.s3a.impl": "org.apache.hadoop.fs.s3a.S3AFileSystem",
             "spark.hadoop.fs.s3a.connection.ssl.enabled": "false",
-            
-            # Committers for S3 performance
             "spark.hadoop.fs.s3a.committer.name": "directory", 
-            "spark.sql.sources.commitProtocolClass": "org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol"
+            "spark.sql.sources.commitProtocolClass": "org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol",
+
+            # --- OOM FIX (Missing in your file) ---
+            "spark.hadoop.fs.s3a.fast.upload": "true",
+            "spark.hadoop.fs.s3a.fast.upload.buffer": "disk", 
+            "spark.hadoop.fs.s3a.buffer.dir": "/tmp/spark-s3-buffer",
+            "spark.hadoop.fs.s3a.multipart.size": "5M",
+            "spark.hadoop.fs.s3a.block.size": "10M"
         }
 
         configs["spark.sql.streaming.checkpointLocation.root"] = SparkConfig.CHECKPOINT_ROOT
-
         return configs
