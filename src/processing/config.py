@@ -1,8 +1,13 @@
+"""
+Central Configuration for Spark Streaming
+BEST PRACTICE: Separate configuration from business logic
+"""
+
 class SparkConfig:
+    """Optimized Spark Configuration for Financial Streaming (Low Resource Mode)"""
     
     # Kafka Configuration
-    # KAFKA_BROKERS = "kafka:29092"
-    KAFKA_BROKERS = "redpanda:9094"
+    KAFKA_BROKERS = "redpanda:9094" # Ensure this matches docker-compose ports
     KAFKA_TOPIC = "stock_prices"
     KAFKA_STARTING_OFFSETS = "earliest" 
     
@@ -11,13 +16,11 @@ class SparkConfig:
     LOG_LEVEL = "WARN"
     
     # Performance Tuning
-    MAX_OFFSETS_PER_TRIGGER = 10000
+    # SENIOR FIX: Drastically throttle input to prevent OOM
+    MAX_OFFSETS_PER_TRIGGER = 200 
     PROCESSING_TIME = "0 seconds" 
     
-    # Storage paths for medallion architecture
-    BRONZE_INIT_DELAY = 45
-    SILVER_INIT_DELAY = 45
-    # BASE_PATH = "/app/data"
+    # Storage paths (MinIO/S3)
     BASE_PATH = "s3a://finance-lake"
     BRONZE_PATH = f"{BASE_PATH}/lake/bronze"
     SILVER_PATH = f"{BASE_PATH}/lake/silver"
@@ -30,8 +33,10 @@ class SparkConfig:
     WATERMARK_DELAY = "5 seconds"
     
     # Spark SQL Optimization
-    SHUFFLE_PARTITIONS = 4
-    ADAPTIVE_ENABLED = True
+    # SENIOR FIX: Force single partition to save RAM
+    SHUFFLE_PARTITIONS = 1
+    # SENIOR FIX: Disable Adaptive Query Execution (it increases partitions automatically)
+    ADAPTIVE_ENABLED = False
     
     # Delta Lake Configuration
     DELTA_MERGE_SCHEMA = True
@@ -49,20 +54,21 @@ class SparkConfig:
             "spark.databricks.delta.schema.autoMerge.enabled": str(SparkConfig.DELTA_MERGE_SCHEMA).lower(),
             
             # --- STREAMING ---
-            "spark.sql.streaming.minBatchesToRetain": "10",
+            "spark.sql.streaming.minBatchesToRetain": "5",
             "spark.sql.streaming.schemaInference": "false",
-            "spark.sql.adaptive.enabled": "true",
             "spark.streaming.stopGracefullyOnShutdown": "true",
             "spark.sql.streaming.kafka.consumer.poll.ms": "512",
             
-            # --- LOCAL MODE TUNING (Critical) ---
-            "spark.master": "local[*]", 
-            "spark.driver.memory": "4g",
-            "spark.sql.shuffle.partitions": "2", # Reduced from 4
-            "spark.default.parallelism": "2",
-            "spark.memory.fraction": "0.6",
-            "spark.memory.storageFraction": "0.1",
+            # --- CRITICAL STABILITY SETTINGS ---
+            "spark.sql.adaptive.enabled": "false",  # Must be false for small containers
+            "spark.sql.adaptive.coalescePartitions.enabled": "false",
+            "spark.sql.shuffle.partitions": str(SparkConfig.SHUFFLE_PARTITIONS),
+            "spark.default.parallelism": str(SparkConfig.SHUFFLE_PARTITIONS),
             "spark.sql.streaming.statefulOperator.checkCorrectness.enabled": "false",
+
+            # --- MEMORY SAFETY ---
+            "spark.memory.fraction": "0.5",        
+            "spark.memory.storageFraction": "0.1", 
 
             # --- S3 / MINIO CONFIG ---
             "spark.hadoop.fs.s3a.endpoint": "http://minio:9000",
@@ -74,7 +80,7 @@ class SparkConfig:
             "spark.hadoop.fs.s3a.committer.name": "directory", 
             "spark.sql.sources.commitProtocolClass": "org.apache.spark.sql.execution.datasources.SQLHadoopMapReduceCommitProtocol",
 
-            # --- OOM FIX (Missing in your file) ---
+            # --- OOM FIX: BUFFERING ---
             "spark.hadoop.fs.s3a.fast.upload": "true",
             "spark.hadoop.fs.s3a.fast.upload.buffer": "disk", 
             "spark.hadoop.fs.s3a.buffer.dir": "/tmp/spark-s3-buffer",
