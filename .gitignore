@@ -21,3 +21,4 @@ logs/
 data/
 checkpoints/
 jars/
+rebase_script.sh
