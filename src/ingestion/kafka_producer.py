@@ -17,7 +17,7 @@ logging.basicConfig(
 class FinanceLakeKafkaProducer:
    
     def __init__(self):
-        self.broker = os.getenv("KAFKA_BROKER", "redpanda:19092")
+        self.broker = os.getenv("KAFKA_BROKER", "redpanda:19094")
         self.topic = os.getenv("TOPIC_NAME", "stock_prices")
 
         try:
