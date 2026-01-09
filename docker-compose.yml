@@ -1,5 +1,5 @@
 services:
-  # --- INFRASTRUCTURE (Redpanda + MinIO) ---
+  # --- INFRASTRUCTURE ---
   redpanda:
     image: docker.redpanda.com/redpandadata/redpanda:v23.2.14
     container_name: redpanda
@@ -16,7 +16,7 @@ services:
       - --advertise-pandaproxy-addr internal://redpanda:8082,external://localhost:18082
       - --schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081
       - --rpc-addr redpanda:33145
-      # - --on-access-auth=false
+      # Removed auth flag
     volumes:
       - redpanda_data:/var/lib/redpanda/data
     healthcheck:
@@ -56,7 +56,7 @@ services:
       exit 0;
       "
 
-  # --- SPARK (SINGLE NODE MODE) ---
+  # --- SPARK (SINGLE NODE MODE - The Fix) ---
   spark-streaming:
     build:
       context: .
@@ -68,7 +68,6 @@ services:
       minio:
         condition: service_healthy
     environment:
-      - SPARK_MODE=local
       - AWS_ACCESS_KEY_ID=minioadmin
       - AWS_SECRET_ACCESS_KEY=minioadmin
       - AWS_REGION=us-east-1
@@ -76,14 +75,12 @@ services:
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
-      # Mount for local MLflow persistence if needed
       - ./data/mlruns:/app/mlruns
-    # THE MAGIC COMMAND: master "local[*]" means use all cores on THIS container. No workers.
+    # COMMAND: Use Local Mode (No Master/Worker)
     command: >
-      spark-submit 
+      /opt/spark/bin/spark-submit 
       --master "local[*]" 
       --driver-memory 4g 
-      --conf spark.driver.extraJavaOptions=-Dlog4j.configuration=file:/opt/bitnami/spark/conf/log4j.properties
       /app/src/processing/spark_streaming_main.py
 
   # --- APPS ---
