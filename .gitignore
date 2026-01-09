@@ -18,7 +18,6 @@ parts/
 sdist/
 logs/
 .env
-data/
 checkpoints/
 jars/
-rebase_script.sh
+data/
