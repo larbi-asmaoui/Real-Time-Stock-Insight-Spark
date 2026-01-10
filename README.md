@@ -11,6 +11,10 @@ _(Main dashboard view showing real-time price and signals)_
 
 ![Dashboard View 2](screenshots/dashboard_view_2.png)
 
+### 🎥 Demo Video
+
+[▶️ Watch the Project Demo](YOUR_VIDEO_LINK_HERE)
+
 ---
 
 ## 🚀 Features
