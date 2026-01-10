@@ -22,12 +22,24 @@ def get_db_connection():
             SET s3_url_style='path';
         """)
         
-        # Initialize Views (Virtual Tables)
-        # We use try/except in case files don't exist yet
+        # Initialize Views (Virtual Tables) for ALL layers
+        # This allows you to run "SELECT * FROM bronze"
+        tables = {
+            "bronze": config.BRONZE_PATH,
+            "silver": config.SILVER_PATH,
+            "gold": config.GOLD_PATH
+        }
+        
+        for name, path in tables.items():
+            try:
+                con.execute(f"CREATE OR REPLACE VIEW {name} AS SELECT * FROM read_parquet('{path}/symbol=*/*.parquet', hive_partitioning=true)")
+            except:
+                pass # Table might not exist yet
+
+        # Predictions is flat (not partitioned by symbol usually in this setup)
         try:
-            con.execute(f"CREATE OR REPLACE VIEW gold AS SELECT * FROM read_parquet('{config.GOLD_PATH}/symbol=*/*.parquet', hive_partitioning=true)")
             con.execute(f"CREATE OR REPLACE VIEW predictions AS SELECT * FROM read_parquet('{config.PRED_PATH}/*.parquet')")
-        except Exception:
+        except:
             pass
             
         return con
