@@ -18,10 +18,10 @@ COPY jars /opt/spark/jars/
 # 3. SENIOR OPTIMIZATION: BuildKit Cache & CPU-Only Torch
 # This mounts a local cache for pip. If you rebuild, it uses the cache.
 # --index-url points to the CPU-only repo (Small download).
-RUN --mount=type=cache,target=/root/.cache/pip \
-    pip install --no-cache-dir \
-    torch torchvision torchaudio \
-    --index-url https://download.pytorch.org/whl/cpu
+# RUN --mount=type=cache,target=/root/.cache/pip \
+#     pip install --no-cache-dir \
+#     torch torchvision torchaudio \
+#     --index-url https://download.pytorch.org/whl/cpu
 
 # 4. Install other Python deps
 # Ensure 'pyspark' and 'torch' are REMOVED from this file!

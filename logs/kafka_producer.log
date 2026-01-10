@@ -1,15 +1,57 @@
-2026-01-09 21:27:28,404 INFO [Kafka] Connected to redpanda:9094, topic=stock_prices
-2026-01-09 21:27:28,406 INFO Starting Yahoo async fetcher for: ['AAPL', 'GOOG', 'AMZN', 'MSFT', 'TSLA', 'META', 'NFLX']
-2026-01-09 21:27:28,408 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.3', 9094)]>: connecting to redpanda:9094 [('172.18.0.3', 9094) IPv4]
-2026-01-09 21:27:28,412 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.3', 9094)]>: Connection complete.
-2026-01-09 21:27:28,422 INFO Starting Yahoo async sender.
-2026-01-09 21:27:32,167 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.3', 9094)]>: connecting to redpanda:9094 [('172.18.0.3', 9094) IPv4]
-2026-01-09 21:27:32,170 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.3', 9094)]>: Connection complete.
-2026-01-09 21:27:32,173 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.3', 9094)]>: Closing connection. 
-2026-01-09 21:27:32,183 INFO [KAFKA PUSH] record = {'symbol': 'AAPL', 'currency': 'USD', 'exchange': 'NMS', 'price': 259.37, 'open': 259.075, 'high': 260.21, 'low': 256.2201, 'volume': 38241445, 'market_cap': 3849151840256, 'timestamp': 1767992401}
-2026-01-09 21:27:32,191 INFO [KAFKA PUSH] record = {'symbol': 'GOOG', 'currency': 'USD', 'exchange': 'NMS', 'price': 329.14, 'open': 327.5915, 'high': 331.48, 'low': 326.25, 'volume': 16971547, 'market_cap': 3973323423744, 'timestamp': 1767992402}
-2026-01-09 21:27:32,199 INFO [KAFKA PUSH] record = {'symbol': 'AMZN', 'currency': 'USD', 'exchange': 'NMS', 'price': 247.38, 'open': 244.568, 'high': 247.82, 'low': 242.25, 'volume': 32191833, 'market_cap': 2644545634304, 'timestamp': 1767992400}
-2026-01-09 21:27:32,208 INFO [KAFKA PUSH] record = {'symbol': 'MSFT', 'currency': 'USD', 'exchange': 'NMS', 'price': 479.28, 'open': 474.06, 'high': 479.82, 'low': 472.2001, 'volume': 18349119, 'market_cap': 3562567892992, 'timestamp': 1767992401}
-2026-01-09 21:27:32,215 INFO [KAFKA PUSH] record = {'symbol': 'TSLA', 'currency': 'USD', 'exchange': 'NMS', 'price': 445.01, 'open': 435.945, 'high': 449.05, 'low': 430.39, 'volume': 66012462, 'market_cap': 1480022818816, 'timestamp': 1767992400}
-2026-01-09 21:27:32,220 INFO [KAFKA PUSH] record = {'symbol': 'META', 'currency': 'USD', 'exchange': 'NMS', 'price': 653.06, 'open': 645.5, 'high': 654.95, 'low': 642.8875, 'volume': 11408936, 'market_cap': 1646055784448, 'timestamp': 1767992400}
-2026-01-09 21:27:32,229 INFO [KAFKA PUSH] record = {'symbol': 'NFLX', 'currency': 'USD', 'exchange': 'NMS', 'price': 89.46, 'open': 90.03, 'high': 90.04, 'low': 88.32, 'volume': 53636497, 'market_cap': 379070939136, 'timestamp': 1767992400}
+2026-01-10 14:12:26,412 INFO [Kafka] Connected to redpanda:9094, topic=stock_prices
+2026-01-10 14:12:26,414 INFO Starting Yahoo async fetcher for: ['AAPL', 'GOOG', 'AMZN', 'MSFT', 'TSLA', 'META', 'NFLX']
+2026-01-10 14:12:26,418 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: connecting to redpanda:9094 [('172.18.0.2', 9094) IPv4]
+2026-01-10 14:12:26,421 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.2', 9094)]>: Connection complete.
+2026-01-10 14:12:26,433 INFO Starting Yahoo async sender.
+2026-01-10 14:12:28,194 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: connecting to redpanda:9094 [('172.18.0.2', 9094) IPv4]
+2026-01-10 14:12:28,197 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.2', 9094)]>: Connection complete.
+2026-01-10 14:12:28,199 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. 
+2026-01-10 14:12:28,212 INFO [KAFKA PUSH] record = {'symbol': 'AAPL', 'currency': 'USD', 'exchange': 'NMS', 'price': 259.37, 'open': 259.075, 'high': 260.21, 'low': 256.2201, 'volume': 39911019, 'market_cap': 3832542658560, 'timestamp': 1767992401}
+2026-01-10 14:12:28,219 INFO [KAFKA PUSH] record = {'symbol': 'GOOG', 'currency': 'USD', 'exchange': 'NMS', 'price': 329.14, 'open': 327.5915, 'high': 331.48, 'low': 326.25, 'volume': 16971547, 'market_cap': 3973323423744, 'timestamp': 1767992402}
+2026-01-10 14:12:28,225 INFO [KAFKA PUSH] record = {'symbol': 'AMZN', 'currency': 'USD', 'exchange': 'NMS', 'price': 247.38, 'open': 244.568, 'high': 247.82, 'low': 242.25, 'volume': 32191833, 'market_cap': 2644545634304, 'timestamp': 1767992400}
+2026-01-10 14:12:28,229 INFO [KAFKA PUSH] record = {'symbol': 'MSFT', 'currency': 'USD', 'exchange': 'NMS', 'price': 479.28, 'open': 474.06, 'high': 479.82, 'low': 472.2001, 'volume': 18349119, 'market_cap': 3562567892992, 'timestamp': 1767992401}
+2026-01-10 14:12:28,236 INFO [KAFKA PUSH] record = {'symbol': 'TSLA', 'currency': 'USD', 'exchange': 'NMS', 'price': 445.01, 'open': 435.945, 'high': 449.05, 'low': 430.39, 'volume': 66012462, 'market_cap': 1480022818816, 'timestamp': 1767992400}
+2026-01-10 14:12:28,238 INFO [KAFKA PUSH] record = {'symbol': 'META', 'currency': 'USD', 'exchange': 'NMS', 'price': 653.06, 'open': 645.5, 'high': 654.95, 'low': 642.8875, 'volume': 11408936, 'market_cap': 1646055784448, 'timestamp': 1767992400}
+2026-01-10 14:12:28,244 INFO [KAFKA PUSH] record = {'symbol': 'NFLX', 'currency': 'USD', 'exchange': 'NMS', 'price': 89.46, 'open': 90.03, 'high': 90.04, 'low': 88.32, 'volume': 53636497, 'market_cap': 379070939136, 'timestamp': 1767992400}
+2026-01-10 15:27:28,976 ERROR Failed to perform, curl: (16) . See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:27:29,012 ERROR Failed to perform, curl: (16) . See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:27:29,035 ERROR Failed to perform, curl: (16) . See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:27:29,242 ERROR Failed to perform, curl: (16) . See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:27:29,243 ERROR [ERROR] Fetch GOOG: argument of type 'NoneType' is not iterable
+2026-01-10 15:50:46,067 ERROR [ERROR] Fetch GOOG: Failed to perform, curl: (28) Operation timed out after 30003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:50:46,069 ERROR [ERROR] Fetch AAPL: Failed to perform, curl: (28) Operation timed out after 30003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:50:46,083 ERROR [ERROR] Fetch TSLA: Failed to perform, curl: (28) Operation timed out after 30003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:50:46,086 ERROR [ERROR] Fetch MSFT: Failed to perform, curl: (28) Operation timed out after 30003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:50:46,094 ERROR [ERROR] Fetch META: Failed to perform, curl: (28) Operation timed out after 30003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:50:46,096 ERROR [ERROR] Fetch NFLX: Failed to perform, curl: (28) Operation timed out after 30002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 15:50:46,096 ERROR [ERROR] Fetch AMZN: Failed to perform, curl: (28) Operation timed out after 30003 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+2026-01-10 16:58:29,472 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. KafkaConnectionError: Socket EVENT_READ without in-flight-requests
+2026-01-10 16:58:29,475 WARNING Node 0 connection failed -- refreshing metadata
+2026-01-10 16:58:29,477 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: connecting to redpanda:9094 [('172.18.0.2', 9094) IPv4]
+2026-01-10 16:58:29,478 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Connect attempt returned error 111. Disconnecting.
+2026-01-10 16:58:29,478 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2026-01-10 16:58:29,478 WARNING Node 0 connection failed -- refreshing metadata
+2026-01-10 16:58:29,587 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: connecting to redpanda:9094 [('172.18.0.2', 9094) IPv4]
+2026-01-10 16:58:29,591 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Connect attempt returned error 111. Disconnecting.
+2026-01-10 16:58:29,592 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2026-01-10 16:58:29,593 WARNING Node 0 connection failed -- refreshing metadata
+2026-01-10 16:58:29,786 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: connecting to redpanda:9094 [('172.18.0.2', 9094) IPv4]
+2026-01-10 16:58:29,787 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Connect attempt returned error 111. Disconnecting.
+2026-01-10 16:58:29,787 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. KafkaConnectionError: 111 ECONNREFUSED
+2026-01-10 16:58:29,789 WARNING Node 0 connection failed -- refreshing metadata
+2026-01-10 16:58:30,183 WARNING DNS lookup failed for redpanda:9094, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2026-01-10 16:58:30,184 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: DNS lookup failed for redpanda:9094 (AddressFamily.AF_UNSPEC)
+2026-01-10 16:58:30,184 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. KafkaConnectionError: DNS failure
+2026-01-10 16:58:30,185 WARNING Node 0 connection failed -- refreshing metadata
+2026-01-10 16:58:36,033 WARNING DNS lookup failed for redpanda:9094, exception was [Errno -2] Name or service not known. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2026-01-10 16:58:36,034 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: DNS lookup failed for redpanda:9094 (AddressFamily.AF_UNSPEC)
+2026-01-10 16:58:36,038 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. KafkaConnectionError: DNS failure
+2026-01-10 16:58:36,039 WARNING Node 0 connection failed -- refreshing metadata
+2026-01-10 16:58:41,097 WARNING DNS lookup failed for redpanda:9094, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2026-01-10 16:58:41,098 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: DNS lookup failed for redpanda:9094 (AddressFamily.AF_UNSPEC)
+2026-01-10 16:58:41,102 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. KafkaConnectionError: DNS failure
+2026-01-10 16:58:41,103 WARNING Node 0 connection failed -- refreshing metadata
+2026-01-10 16:58:41,155 WARNING DNS lookup failed for redpanda:9094, exception was [Errno -3] Temporary failure in name resolution. Is your advertised.listeners (called advertised.host.name before Kafka 9) correct and resolvable?
+2026-01-10 16:58:41,156 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: DNS lookup failed for redpanda:9094 (AddressFamily.AF_UNSPEC)
+2026-01-10 16:58:41,156 ERROR <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.2', 9094)]>: Closing connection. KafkaConnectionError: DNS failure
+2026-01-10 16:58:41,157 WARNING Node 0 connection failed -- refreshing metadata

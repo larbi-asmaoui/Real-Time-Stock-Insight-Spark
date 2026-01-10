@@ -3,8 +3,6 @@ kafka-python
 findspark
 dotenv
 delta-spark==2.4.0
-# torch
-mlflow
 numpy
 pandas
 pyarrow

@@ -75,7 +75,7 @@ services:
     volumes:
       - ./src:/app/src
       - ./logs:/app/logs
-      - ./data/mlruns:/app/mlruns
+      - ./data/mlruns:/mlruns
     command: tail -f /dev/null
     # command: >
     #   spark-submit 
@@ -119,15 +119,16 @@ services:
     volumes:
       - ./src:/app/src
 
-  mlflow:
-    image: ghcr.io/mlflow/mlflow:v2.10.0
-    container_name: mlflow
-    ports:
-      - "5000:5000"
-    volumes:
-      
-      - ./data/mlruns:/app/mlruns
-    command: mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri file:///app/mlruns
+  # mlflow:
+  #   image: ghcr.io/mlflow/mlflow:v2.10.0
+  #   container_name: mlflow
+  #   ports:
+  #     - "5000:5000"
+  #   volumes:
+  #     # Map host data/mlruns to container /mlruns (Root level is safer)
+  #     - ./data/mlruns:/mlruns
+  #   # Point backend store to /mlruns
+  #   command: mlflow ui --host 0.0.0.0 --port 5000 --backend-store-uri file:///mlruns
 
 volumes:
   minio_data:
