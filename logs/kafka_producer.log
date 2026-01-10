@@ -1,15 +1,15 @@
-2026-01-09 21:27:28,404 INFO [Kafka] Connected to redpanda:9094, topic=stock_prices
-2026-01-09 21:27:28,406 INFO Starting Yahoo async fetcher for: ['AAPL', 'GOOG', 'AMZN', 'MSFT', 'TSLA', 'META', 'NFLX']
-2026-01-09 21:27:28,408 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.3', 9094)]>: connecting to redpanda:9094 [('172.18.0.3', 9094) IPv4]
-2026-01-09 21:27:28,412 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.3', 9094)]>: Connection complete.
-2026-01-09 21:27:28,422 INFO Starting Yahoo async sender.
-2026-01-09 21:27:32,167 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.3', 9094)]>: connecting to redpanda:9094 [('172.18.0.3', 9094) IPv4]
-2026-01-09 21:27:32,170 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.3', 9094)]>: Connection complete.
-2026-01-09 21:27:32,173 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.3', 9094)]>: Closing connection. 
-2026-01-09 21:27:32,183 INFO [KAFKA PUSH] record = {'symbol': 'AAPL', 'currency': 'USD', 'exchange': 'NMS', 'price': 259.37, 'open': 259.075, 'high': 260.21, 'low': 256.2201, 'volume': 38241445, 'market_cap': 3849151840256, 'timestamp': 1767992401}
-2026-01-09 21:27:32,191 INFO [KAFKA PUSH] record = {'symbol': 'GOOG', 'currency': 'USD', 'exchange': 'NMS', 'price': 329.14, 'open': 327.5915, 'high': 331.48, 'low': 326.25, 'volume': 16971547, 'market_cap': 3973323423744, 'timestamp': 1767992402}
-2026-01-09 21:27:32,199 INFO [KAFKA PUSH] record = {'symbol': 'AMZN', 'currency': 'USD', 'exchange': 'NMS', 'price': 247.38, 'open': 244.568, 'high': 247.82, 'low': 242.25, 'volume': 32191833, 'market_cap': 2644545634304, 'timestamp': 1767992400}
-2026-01-09 21:27:32,208 INFO [KAFKA PUSH] record = {'symbol': 'MSFT', 'currency': 'USD', 'exchange': 'NMS', 'price': 479.28, 'open': 474.06, 'high': 479.82, 'low': 472.2001, 'volume': 18349119, 'market_cap': 3562567892992, 'timestamp': 1767992401}
-2026-01-09 21:27:32,215 INFO [KAFKA PUSH] record = {'symbol': 'TSLA', 'currency': 'USD', 'exchange': 'NMS', 'price': 445.01, 'open': 435.945, 'high': 449.05, 'low': 430.39, 'volume': 66012462, 'market_cap': 1480022818816, 'timestamp': 1767992400}
-2026-01-09 21:27:32,220 INFO [KAFKA PUSH] record = {'symbol': 'META', 'currency': 'USD', 'exchange': 'NMS', 'price': 653.06, 'open': 645.5, 'high': 654.95, 'low': 642.8875, 'volume': 11408936, 'market_cap': 1646055784448, 'timestamp': 1767992400}
-2026-01-09 21:27:32,229 INFO [KAFKA PUSH] record = {'symbol': 'NFLX', 'currency': 'USD', 'exchange': 'NMS', 'price': 89.46, 'open': 90.03, 'high': 90.04, 'low': 88.32, 'volume': 53636497, 'market_cap': 379070939136, 'timestamp': 1767992400}
+2026-01-10 11:33:26,503 INFO [Kafka] Connected to redpanda:9094, topic=stock_prices
+2026-01-10 11:33:26,504 INFO Starting Yahoo async fetcher for: ['AAPL', 'GOOG', 'AMZN', 'MSFT', 'TSLA', 'META', 'NFLX']
+2026-01-10 11:33:26,504 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.4', 9094)]>: connecting to redpanda:9094 [('172.18.0.4', 9094) IPv4]
+2026-01-10 11:33:26,508 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.4', 9094)]>: Connection complete.
+2026-01-10 11:33:26,514 INFO Starting Yahoo async sender.
+2026-01-10 11:33:28,688 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connecting> [IPv4 ('172.18.0.4', 9094)]>: connecting to redpanda:9094 [('172.18.0.4', 9094) IPv4]
+2026-01-10 11:33:28,690 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.4', 9094)]>: Connection complete.
+2026-01-10 11:33:28,691 INFO <BrokerConnection client_id=kafka-python-producer-1, node_id=bootstrap-0 host=redpanda:9094 <connected> [IPv4 ('172.18.0.4', 9094)]>: Closing connection. 
+2026-01-10 11:33:28,694 INFO [KAFKA PUSH] record = {'symbol': 'AAPL', 'currency': 'USD', 'exchange': 'NMS', 'price': 259.37, 'open': 259.075, 'high': 260.21, 'low': 256.2201, 'volume': 39911019, 'market_cap': 3832542658560, 'timestamp': 1767992401}
+2026-01-10 11:33:28,698 INFO [KAFKA PUSH] record = {'symbol': 'GOOG', 'currency': 'USD', 'exchange': 'NMS', 'price': 329.14, 'open': 327.5915, 'high': 331.48, 'low': 326.25, 'volume': 16971547, 'market_cap': 3973323423744, 'timestamp': 1767992402}
+2026-01-10 11:33:28,700 INFO [KAFKA PUSH] record = {'symbol': 'AMZN', 'currency': 'USD', 'exchange': 'NMS', 'price': 247.38, 'open': 244.568, 'high': 247.82, 'low': 242.25, 'volume': 32191833, 'market_cap': 2644545634304, 'timestamp': 1767992400}
+2026-01-10 11:33:28,704 INFO [KAFKA PUSH] record = {'symbol': 'MSFT', 'currency': 'USD', 'exchange': 'NMS', 'price': 479.28, 'open': 474.06, 'high': 479.82, 'low': 472.2001, 'volume': 18349119, 'market_cap': 3562567892992, 'timestamp': 1767992401}
+2026-01-10 11:33:28,707 INFO [KAFKA PUSH] record = {'symbol': 'TSLA', 'currency': 'USD', 'exchange': 'NMS', 'price': 445.01, 'open': 435.945, 'high': 449.05, 'low': 430.39, 'volume': 66012462, 'market_cap': 1480022818816, 'timestamp': 1767992400}
+2026-01-10 11:33:28,710 INFO [KAFKA PUSH] record = {'symbol': 'META', 'currency': 'USD', 'exchange': 'NMS', 'price': 653.06, 'open': 645.5, 'high': 654.95, 'low': 642.8875, 'volume': 11408936, 'market_cap': 1646055784448, 'timestamp': 1767992400}
+2026-01-10 11:33:28,711 INFO [KAFKA PUSH] record = {'symbol': 'NFLX', 'currency': 'USD', 'exchange': 'NMS', 'price': 89.46, 'open': 90.03, 'high': 90.04, 'low': 88.32, 'volume': 53636497, 'market_cap': 379070939136, 'timestamp': 1767992400}
