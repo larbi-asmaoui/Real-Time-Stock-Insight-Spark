@@ -10,7 +10,6 @@ A scalable, end-to-end data engineering and machine learning platform that inges
 _(Main dashboard view showing real-time price and signals)_
 
 ![Dashboard View 2](screenshots/dashboard_view_2.png)
-_(Detailed view of the terminal interface)_
 
 ---
 
@@ -146,6 +145,14 @@ _(Bronze, Silver, and Gold data layers in MinIO)_
 
 ---
 
-## 📄 License
+## � Contributors
+
+Developed by:
+
+- Abdessamia KOUBRITI
+- Abdelali AIT CHIKH
+- Larbi ASMAOUI
+
+## �📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
