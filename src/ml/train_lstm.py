@@ -112,7 +112,7 @@ def train():
     # 6. PYTORCH TRAINING LOOP
     logging.info("Starting Training...")
     
-    mlflow.set_tracking_uri("file:///app/mlruns")
+    mlflow.set_tracking_uri("file:///mlruns")
     mlflow.set_experiment("Stock_Prediction_LSTM")
 
     with mlflow.start_run():
