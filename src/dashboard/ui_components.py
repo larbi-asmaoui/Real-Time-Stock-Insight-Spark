@@ -9,13 +9,24 @@ def render_kpis(df, signal_row):
     k1, k2, k3, k4 = st.columns(4)
     
     with k1:
-        st.metric("Price", f"${latest['avg_price']:.2f}", 
-                  f"{latest['price_change_pct']:.2f}%")
+        # FIX: Use 'avg_price_change_pct' and .get() for safety
+        pct_change = latest.get('avg_price_change_pct', 0.0)
+        st.metric(
+            label="Price", 
+            value=f"${latest['avg_price']:.2f}", 
+            delta=f"{pct_change:.2f}%"
+        )
     
     with k2:
         if signal_row is not None:
-            sig = signal_row['signal']
-            prob = signal_row['probability']
+            # Handle cases where signal might be missing in older rows
+            sig = signal_row.get('signal', "WAIT")
+            prob = signal_row.get('probability', 0.0)
+            
+            # Simple logic if signal string is missing but prob exists
+            if sig == "WAIT" and prob > 0:
+                sig = "BUY" if prob > 0.5 else "SELL"
+
             color = "normal" if sig == "BUY" else "inverse"
             st.metric("AI Signal", f"{sig}", f"{prob:.1%} Conf.", delta_color=color)
         else:
@@ -32,7 +43,11 @@ def render_advanced_chart(df, symbol):
     df = df.sort_values("window_end")
     
     # Calculate Volume Delta
-    df['volume_delta'] = df['total_volume'].diff().fillna(0).clip(lower=0)
+    # Use fillna(0) to prevent NaN errors on the first row
+    if 'total_volume' in df.columns:
+        df['volume_delta'] = df['total_volume'].diff().fillna(0).clip(lower=0)
+    else:
+        df['volume_delta'] = 0
 
     # Subplots
     fig = make_subplots(
