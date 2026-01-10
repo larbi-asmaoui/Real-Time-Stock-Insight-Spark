@@ -3,11 +3,23 @@ import time
 from dashboard import config
 from dashboard import services
 from dashboard import ui_components
+from dashboard import sql_page  # <--- Import new page
 
 # 1. Setup Page
 st.set_page_config(page_title=config.PAGE_TITLE, page_icon=config.PAGE_ICON, layout=config.LAYOUT)
 
-# 2. Sidebar Configuration (The "Controller")
+# 2. Navigation
+st.sidebar.title(f"{config.PAGE_ICON} FinanceLake")
+page = st.sidebar.radio("Navigation", ["Live Dashboard", "SQL Playground"])
+
+if page == "SQL Playground":
+    sql_page.render_sql_page()
+    st.stop() # Stop processing the rest of the file if on SQL page
+
+# ==========================================
+# LIVE DASHBOARD LOGIC (Existing Code)
+# ==========================================
+
 st.sidebar.header("📡 Data Feed")
 
 # Fetch symbols
@@ -18,35 +30,28 @@ if not symbols:
     time.sleep(3)
     st.rerun()
 
-# --- UX FIX: Session State ---
+# Session State for Symbol
 if 'selected_symbol' not in st.session_state:
     st.session_state.selected_symbol = symbols[0]
 
-# The Selectbox writes directly to session state
 selected_symbol = st.sidebar.selectbox(
     "Select Asset", 
     options=symbols,
     index=symbols.index(st.session_state.selected_symbol) if st.session_state.selected_symbol in symbols else 0,
-    key='symbol_selector' # This automatically updates st.session_state.symbol_selector
+    key='symbol_selector'
 )
 
-# Update the main state variable if changed
 if st.session_state.symbol_selector != st.session_state.selected_symbol:
     st.session_state.selected_symbol = st.session_state.symbol_selector
-    st.rerun() # Immediate update on click
+    st.rerun()
 
 auto_refresh = st.sidebar.checkbox("Live Updates", value=True)
 
-# 3. Main Content
-st.title(f"{config.PAGE_ICON} {config.PAGE_TITLE}")
-
-# Create a placeholder for the live content
+st.title(f"📈 Real-Time Market Monitor")
 dashboard_placeholder = st.empty()
 
-# 4. Rendering Logic
 def update_dashboard():
     with dashboard_placeholder.container():
-        # Fetch Data
         df = services.get_market_data(st.session_state.selected_symbol)
         prediction = services.get_latest_prediction(st.session_state.selected_symbol)
         
@@ -57,7 +62,6 @@ def update_dashboard():
         else:
             st.info(f"Waiting for data for {st.session_state.selected_symbol}...")
 
-# 5. Execution Loop
 if auto_refresh:
     update_dashboard()
     time.sleep(config.REFRESH_SECONDS)
